@@ -1,57 +1,118 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  html {
-    font-family: 'DM Sans', sans-serif;
-    scroll-behavior: smooth;
-  }
-  body {
-    @apply bg-navy-900 text-white;
-  }
-  h1, h2, h3, h4, h5 {
-    font-family: 'Syne', sans-serif;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@layer components {
+html {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0A1628;
+  color: white;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+}
+
+.section-padding {
+  padding: 80px 16px;
+}
+
+@media (min-width: 768px) {
   .section-padding {
-    @apply py-20 px-4 md:px-8 lg:px-16;
-  }
-  .container-max {
-    @apply max-w-7xl mx-auto;
-  }
-  .gradient-text {
-    @apply bg-gradient-to-r from-cyan to-teal bg-clip-text text-transparent;
-  }
-  .btn-primary {
-    @apply bg-cyan text-navy-900 font-semibold px-6 py-3 rounded-lg
-           hover:bg-cyan-light transition-all duration-200
-           shadow-glow-cyan hover:shadow-lg;
-  }
-  .btn-outline {
-    @apply border border-cyan text-cyan px-6 py-3 rounded-lg
-           hover:bg-cyan hover:text-navy-900 transition-all duration-200;
-  }
-  .card-dark {
-    @apply bg-surface-card border border-surface-border rounded-xl
-           p-6 hover:border-cyan/40 transition-all duration-300;
-  }
-  .nav-link {
-    @apply text-white/80 hover:text-cyan transition-colors duration-200 text-sm font-medium;
+    padding: 80px 32px;
   }
 }
 
-@layer utilities {
-  .glow-text-cyan {
-    text-shadow: 0 0 20px rgba(0, 168, 232, 0.5);
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 80px 64px;
   }
-  .pcb-border {
-    border-image: repeating-linear-gradient(
-      90deg,
-      #00A8E8 0px, #00A8E8 20px,
-      transparent 20px, transparent 30px
-    ) 1;
-  }
+}
+
+.container-max {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #00A8E8, #00D4AA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-primary {
+  background-color: #00A8E8;
+  color: #0A1628;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 20px rgba(0, 168, 232, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #33BFEF;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #00A8E8;
+  color: #00A8E8;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: #00A8E8;
+  color: #0A1628;
+}
+
+.card-dark {
+  background-color: #1a2a42;
+  border: 1px solid #1f3250;
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.card-dark:hover {
+  border-color: rgba(0, 168, 232, 0.4);
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #00A8E8;
+}
+
+.glow-text-cyan {
+  text-shadow: 0 0 20px rgba(0, 168, 232, 0.5);
+}
+
+.pcb-border {
+  border-image: repeating-linear-gradient(
+    90deg,
+    #00A8E8 0px, #00A8E8 20px,
+    transparent 20px, transparent 30px
+  ) 1;
 }
