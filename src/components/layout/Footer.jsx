@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { MapPin, Mail, Phone, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react'
+import { MapPin, Mail, Phone, Share2, Code, Send, ExternalLink } from 'lucide-react'
 
 const serviceLinks = [
   { label: 'Product Design & Development', href: '/services/product-design' },
@@ -23,10 +23,10 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: Linkedin,  href: '#', label: 'LinkedIn'  },
-                { icon: Twitter,   href: '#', label: 'Twitter'   },
-                { icon: Facebook,  href: '#', label: 'Facebook'  },
-                { icon: Instagram, href: '#', label: 'Instagram' },
+                { icon: Share2,  href: '#', label: 'LinkedIn'  },
+                { icon: Code,   href: '#', label: 'GitHub'   },
+                { icon: Send,  href: '#', label: 'Email'  },
+                { icon: ExternalLink, href: '#', label: 'Web' },
               ].map(({ icon: Icon, href, label }) => (
                 <a key={label} href={href} aria-label={label}
                   className="w-9 h-9 rounded-lg border border-surface-border flex items-center justify-center
