@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'DM Sans', sans-serif;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-navy-900 text-white;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: 'Syne', sans-serif;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-20 px-4 md:px-8 lg:px-16;
+  }
+  .container-max {
+    @apply max-w-7xl mx-auto;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan to-teal bg-clip-text text-transparent;
+  }
+  .btn-primary {
+    @apply bg-cyan text-navy-900 font-semibold px-6 py-3 rounded-lg
+           hover:bg-cyan-light transition-all duration-200
+           shadow-glow-cyan hover:shadow-lg;
+  }
+  .btn-outline {
+    @apply border border-cyan text-cyan px-6 py-3 rounded-lg
+           hover:bg-cyan hover:text-navy-900 transition-all duration-200;
+  }
+  .card-dark {
+    @apply bg-surface-card border border-surface-border rounded-xl
+           p-6 hover:border-cyan/40 transition-all duration-300;
+  }
+  .nav-link {
+    @apply text-white/80 hover:text-cyan transition-colors duration-200 text-sm font-medium;
+  }
+}
+
+@layer utilities {
+  .glow-text-cyan {
+    text-shadow: 0 0 20px rgba(0, 168, 232, 0.5);
+  }
+  .pcb-border {
+    border-image: repeating-linear-gradient(
+      90deg,
+      #00A8E8 0px, #00A8E8 20px,
+      transparent 20px, transparent 30px
+    ) 1;
+  }
+}
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
