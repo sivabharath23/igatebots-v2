@@ -1,0 +1,39 @@
+{
+  "name": "iGatebots – Engineering Solutions",
+  "short_name": "iGatebots",
+  "description": "Expert services in Product Design, Electronics Circuit Design, PCB Design, and Reverse Engineering.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050a14",
+  "theme_color": "#1a6cff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "https://igatebots.com/assets/img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://igatebots.com/assets/img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "PCB Design",
+      "url": "/services/pcb-design",
+      "description": "PCB Design services"
+    },
+    {
+      "name": "Contact Us",
+      "url": "/contact",
+      "description": "Get in touch with iGatebots"
+    }
+  ]
+}
