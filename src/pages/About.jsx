@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedSection from '../components/AnimatedSection';
 import PCBBackground from '../components/PCBBackground';
 import { ServiceIcon } from '../components/ServiceIcon';
@@ -23,7 +24,103 @@ const valueIcons = {
   reliability: <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />,
 };
 
+const workflowSteps = [
+  {
+    number: '01',
+    title: 'Consult & Analyze',
+    subtitle: 'Scope & Specifications',
+    desc: 'We begin by collaborating closely to define design specifications, operational parameters, components selection strategy, and system architecture feasibility.',
+    features: ['Technical Feasibility Study', 'Component Sourcing Research', 'Architecture & Cost Estimation'],
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-2.533-3.076l-1.3-.414m-3.353-.39L12 18.75V21M12 3v3.75m0 11.25V18M12 9.75v3M3 13.5h.75m16.5 0h.75m-9-9h.008v.008H12V4.5z" />
+      </svg>
+    )
+  },
+  {
+    number: '02',
+    title: 'Design & Simulate',
+    subtitle: 'Schematic Capture & Verification',
+    desc: 'Creating accurate circuit schematics with rigorous component mapping. We perform simulations to verify circuit behavior, power calculations, and thermal characteristics.',
+    features: ['Analog & Digital Simulation', 'Component Footprint Validation', 'Power/Thermal Management'],
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+      </svg>
+    )
+  },
+  {
+    number: '03',
+    title: 'PCB Layout Design',
+    subtitle: 'Precision Routing & Layering',
+    desc: 'Routing multi-layer high-density boards. We optimize trace geometries for signal integrity, EMI/EMC compliance, and thermal dispersion with full 3D interference checking.',
+    features: ['High-Speed Signal routing', 'Impedance Control & Stackup', '3D CAD Clearance Checking'],
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+      </svg>
+    )
+  },
+  {
+    number: '04',
+    title: 'Prototype & Debug',
+    subtitle: 'Hardware Bring-up & Verification',
+    desc: 'Fabricating sample boards and conducting hands-on hardware testing. We write test drivers and basic firmware to validate inputs, outputs, and sensor communications.',
+    features: ['Oscilloscope/Logic Analyzer Analysis', 'Firmware Integration & Board Support', 'Environmental Stress Testing'],
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+      </svg>
+    )
+  },
+  {
+    number: '05',
+    title: 'Production Support',
+    subtitle: 'Sourcing & DFMA Optimization',
+    desc: 'Providing full manufacturing-ready packages containing Gerber, ODB++, assembly drawings, and optimized Bill of Materials (BOM) to facilitate bulk manufacturing.',
+    features: ['DFMA Manufacturing Audit', 'BOM Consolidation & Cost Down', 'Contract Manufacturer Coordination'],
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+      </svg>
+    )
+  }
+];
+
+const techStack = [
+  { name: 'Altium Designer', type: 'ECAD Tool', desc: 'Industry-standard PCB routing and schematic design suite.' },
+  { name: 'KiCAD / Eagle', type: 'ECAD Tool', desc: 'Flexible layout and circuit simulation platforms for rapid prototyping.' },
+  { name: 'Embedded C/C++', type: 'Firmware & Logic', desc: 'Low-latency code for microcontrollers, bare metal, and RTOS.' },
+  { name: 'STM32 / ESP32', type: 'MCU Platforms', desc: 'Arm Cortex-M processors and IoT modules with integrated RF.' },
+  { name: 'FreeRTOS / Zephyr', type: 'Real-Time OS', desc: 'Multithreading and modular task scheduling in embedded systems.' },
+  { name: 'High-Speed Signal Integrity', type: 'Specialty', desc: 'Impedance matching, crosstalk reduction, and multi-Gbps design.' },
+  { name: 'RoHS / CE Standards', type: 'Certifications', desc: 'Adhering to strict safety, health, and environmental compliance standards.' },
+  { name: 'RF & Wireless Design', type: 'Specialty', desc: 'Designing antennas, impedance matching networks, and EMI shieldings.' }
+];
+
+const faqs = [
+  {
+    q: 'What is the typical turnaround time for a PCB design project?',
+    a: 'It varies depending on complexity. A standard 2 to 4-layer layout typically takes 3-7 business days. High-density, high-speed multi-layer layouts (8+ layers) or RF boards may take 2-3 weeks to ensure complete signal integrity and clearance audits.'
+  },
+  {
+    q: 'Can you help with low-volume prototyping and mass manufacturing?',
+    a: 'Absolutely. We support you through full prototyping and low-volume assembly, and provide complete, verified manufacturing packages (Gerbers, BOM, Pick-and-Place files) that any global EMS provider can immediately build.'
+  },
+  {
+    q: 'Do you sign Non-Disclosure Agreements (NDAs)?',
+    a: 'Yes. Intellectual property protection is critical. We routinely execute NDAs with clients before receiving any project description, schematics, or sample hardware.'
+  },
+  {
+    q: 'What inputs do you require to begin a reverse engineering project?',
+    a: 'Ideally, a functional hardware sample, along with any existing schematics, block diagrams, or lists of core component requirements. We use optical inspections, chip level tracing, and logic analyzers to recreate complete schematics.'
+  }
+];
+
 export default function About() {
+  const [activeStep, setActiveStep] = useState(0);
+  const [activeFaq, setActiveFaq] = useState(null);
+
   useEffect(() => {
     document.title = 'About Us | iGatebots';
     window.scrollTo(0, 0);
@@ -177,6 +274,192 @@ export default function About() {
                 </div>
               </AnimatedSection>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Workflow Process */}
+      <section className="py-24 bg-dark-800/10 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
+              Our Methodology
+            </div>
+            <h2 className="font-display text-4xl font-bold text-white mt-2">
+              Development <span className="gradient-text">Workflow</span>
+            </h2>
+            <p className="text-white/40 text-sm max-w-xl mx-auto mt-4 font-body">
+              How we take your product requirements and transform them into high-performing electronic realities.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid lg:grid-cols-12 gap-12 items-start">
+            {/* Timeline Left: Steps Selection */}
+            <div className="lg:col-span-5 relative pl-8 border-l border-white/10 space-y-8">
+              {workflowSteps.map((step, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveStep(idx)}
+                  className="w-full text-left relative flex items-start gap-4 p-4 rounded-xl transition-all duration-300 group hover:bg-white/5"
+                >
+                  {/* Active dot indicator on vertical line */}
+                  <span className={`absolute -left-[37px] top-6 w-3 h-3 rounded-full border-2 transition-all duration-300 ${
+                    activeStep === idx 
+                      ? 'bg-accent-400 border-accent-400 scale-125 shadow-glow-accent' 
+                      : 'bg-dark-900 border-white/20 group-hover:border-primary-400'
+                  }`} />
+                  
+                  <span className={`font-display text-lg font-bold transition-colors duration-300 shrink-0 ${
+                    activeStep === idx ? 'text-accent-400' : 'text-white/30 group-hover:text-white/60'
+                  }`}>
+                    {step.number}
+                  </span>
+                  <div>
+                    <h4 className={`font-display font-semibold text-base transition-colors duration-300 ${
+                      activeStep === idx ? 'text-white' : 'text-white/65 group-hover:text-white'
+                    }`}>
+                      {step.title}
+                    </h4>
+                    <p className="text-white/35 text-xs mt-1 font-body leading-relaxed">{step.subtitle}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Timeline Right: Detail view */}
+            <div className="lg:col-span-7">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-dark-800/80 border border-white/5 rounded-3xl p-8 shadow-xl shadow-black/30 backdrop-blur-md relative overflow-hidden shimmer-effect"
+                >
+                  <div className="absolute top-0 right-0 p-8 opacity-[0.03] select-none pointer-events-none">
+                    <span className="font-display text-9xl font-black text-white">{workflowSteps[activeStep].number}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-accent-400/10 border border-accent-400/20 flex items-center justify-center text-accent-400 shadow-glow-accent">
+                      {workflowSteps[activeStep].icon}
+                    </div>
+                    <div>
+                      <span className="text-accent-400 text-xs font-body tracking-wider uppercase font-semibold">
+                        Step {workflowSteps[activeStep].number}
+                      </span>
+                      <h3 className="font-display font-bold text-2xl text-white mt-0.5">
+                        {workflowSteps[activeStep].title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="text-white/50 leading-relaxed mb-6 font-body text-sm">
+                    {workflowSteps[activeStep].desc}
+                  </p>
+
+                  <div className="border-t border-white/5 pt-6">
+                    <h5 className="text-white/70 text-xs font-body font-semibold tracking-wider uppercase mb-4">Key Deliverables:</h5>
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      {workflowSteps[activeStep].features.map((feat, fidx) => (
+                        <div key={fidx} className="flex items-center gap-2">
+                          <svg className="w-4 h-4 text-accent-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span className="text-white/60 text-xs font-body">{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Stack */}
+      <section className="py-24 border-t border-white/5 bg-dark-800/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
+              Technologies & Standards
+            </div>
+            <h2 className="font-display text-4xl font-bold text-white mt-2">
+              Our Technical <span className="gradient-text">Core</span>
+            </h2>
+            <p className="text-white/40 text-sm max-w-xl mx-auto mt-4 font-body">
+              A brief list of design platforms, architectures, and guidelines we support to build top-tier hardware.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {techStack.map((tech, idx) => (
+              <AnimatedSection key={idx} delay={idx * 60}>
+                <div className="group h-full bg-dark-800/40 border border-white/5 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary-500/30 hover:bg-dark-800/80 shadow-glow-primary hover:shadow-primary-500/[0.04] flex flex-col justify-between">
+                  <div>
+                    <span className="text-primary-400 text-[10px] font-mono tracking-wider uppercase bg-primary-500/5 border border-primary-500/10 px-2 py-0.5 rounded">
+                      {tech.type}
+                    </span>
+                    <h4 className="font-display font-semibold text-white mt-4 mb-2 group-hover:text-primary-300 transition-colors">
+                      {tech.name}
+                    </h4>
+                    <p className="text-white/40 text-xs font-body leading-relaxed">
+                      {tech.desc}
+                    </p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-24 border-t border-white/5">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <AnimatedSection className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
+              Frequently Asked Questions
+            </div>
+            <h2 className="font-display text-4xl font-bold text-white mt-2">
+              Common <span className="gradient-text">Inquiries</span>
+            </h2>
+          </AnimatedSection>
+
+          <div className="space-y-4">
+            {faqs.map((faq, idx) => {
+              const isOpen = activeFaq === idx;
+              return (
+                <AnimatedSection key={idx} delay={idx * 60}>
+                  <div className="bg-dark-800/40 border border-white/5 rounded-2xl overflow-hidden transition-all duration-300 hover:border-white/10">
+                    <button
+                      onClick={() => setActiveFaq(isOpen ? null : idx)}
+                      className="w-full flex items-center justify-between p-6 text-left"
+                    >
+                      <span className="font-display font-medium text-white text-sm pr-4">
+                        {faq.q}
+                      </span>
+                      <span className={`w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/55 transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-45 text-accent-400 bg-accent-500/10' : ''}`}>
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                      </span>
+                    </button>
+                    
+                    <div className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-60 border-t border-white/5' : 'max-h-0'}`}>
+                      <div className="p-6 text-white/40 text-xs font-body leading-relaxed animate-fade-in">
+                        {faq.a}
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>

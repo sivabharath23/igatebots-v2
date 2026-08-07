@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import PCBBackground from '../components/PCBBackground';
 import AnimatedSection from '../components/AnimatedSection';
 import { ServiceIcon } from '../components/ServiceIcon';
@@ -45,7 +46,7 @@ function Hero() {
   ];
 
   useEffect(() => {
-    const t = setInterval(() => setCurrentSlide((p) => (p + 1) % slides.length), 5500);
+    const t = setInterval(() => setCurrentSlide((p) => (p + 1) % slides.length), 6500);
     return () => clearInterval(t);
   }, []);
 
@@ -60,39 +61,76 @@ function Hero() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32">
-        <div key={currentSlide} className="animate-slide-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse" />
-            {s.tag}
-          </div>
-
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-8xl font-bold leading-[1.05] mb-4">
-            <span className="text-white">{s.title}</span>
-            <br />
-            <span className="gradient-text">{s.accent}</span>
-          </h1>
-
-          <p className="text-primary-300/70 font-body text-sm tracking-widest uppercase mb-5">{s.sub}</p>
-          <p className="text-white/45 text-lg max-w-xl mx-auto mb-10 leading-relaxed font-body">{s.desc}</p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to={s.link}
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/30"
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.65, ease: [0.215, 0.61, 0.355, 1] }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.15, duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-6"
             >
-              Explore Service
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-primary-500/40 text-primary-300 font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:border-primary-400 hover:text-white hover:bg-primary-500/10"
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse" />
+              {s.tag}
+            </motion.div>
+
+            <motion.h1 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.25, duration: 0.5 }}
+              className="font-display text-5xl sm:text-6xl lg:text-8xl font-bold leading-[1.05] mb-4"
             >
-              Get a Free Quote
-            </Link>
-          </div>
-        </div>
+              <span className="text-white">{s.title}</span>
+              <br />
+              <span className="gradient-text">{s.accent}</span>
+            </motion.h1>
+
+            <motion.p 
+              initial={{ y: 15, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.35, duration: 0.5 }}
+              className="text-primary-300/70 font-body text-sm tracking-widest uppercase mb-5"
+            >
+              {s.sub}
+            </motion.p>
+            <motion.p 
+              initial={{ y: 15, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="text-white/45 text-lg max-w-xl mx-auto mb-10 leading-relaxed font-body"
+            >
+              {s.desc}
+            </motion.p>
+
+            <motion.div 
+              initial={{ y: 15, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.45, duration: 0.5 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <Link
+                to={s.link}
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/30 hover:shadow-glow-primary hover:-translate-y-0.5"
+              >
+                Explore Service
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-primary-500/40 text-primary-300 font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:border-primary-400 hover:text-white hover:bg-primary-500/10 hover:-translate-y-0.5"
+              >
+                Get a Free Quote
+              </Link>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
 
         {/* Slide dots */}
         <div className="flex items-center justify-center gap-2 mt-16">
@@ -249,7 +287,7 @@ function ServiceCard({ service }) {
   return (
     <Link
       to={`/services/${service.slug}`}
-      className="group block bg-dark-800/60 border border-white/5 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-primary-500/20 hover:shadow-xl hover:shadow-primary-500/8"
+      className="group block bg-dark-800/60 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-glow-primary gradient-border"
     >
       <div className="relative h-48 overflow-hidden">
         <img
@@ -259,7 +297,7 @@ function ServiceCard({ service }) {
           onError={(e) => { e.target.src = `https://placehold.co/400x300/0a1220/1a6cff?text=${encodeURIComponent(service.title)}`; }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/30 to-transparent" />
-        <div className="absolute top-4 right-4 w-9 h-9 rounded-lg bg-primary-500/20 border border-primary-500/30 flex items-center justify-center text-primary-400">
+        <div className="absolute top-4 right-4 w-9 h-9 rounded-lg bg-primary-500/20 border border-primary-500/30 flex items-center justify-center text-primary-400 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-glow-primary">
           <ServiceIcon slug={service.slug} className="w-5 h-5" />
         </div>
       </div>
@@ -297,7 +335,7 @@ function ProjectsSection() {
             <AnimatedSection key={project.id} delay={i * 70}>
               <Link
                 to={project.link}
-                className="group block bg-dark-800/60 border border-white/5 rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 hover:border-primary-500/20 hover:shadow-xl hover:shadow-primary-500/8"
+                className="group block bg-dark-800/60 rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300 hover:shadow-glow-accent gradient-border"
               >
                 <div className="relative h-44 overflow-hidden">
                   <img
@@ -307,7 +345,7 @@ function ProjectsSection() {
                     onError={(e) => { e.target.src = `https://placehold.co/400x300/0a1220/1a6cff?text=${encodeURIComponent(project.title)}`; }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-dark-900 to-transparent" />
-                  <span className="absolute top-3 left-3 px-2.5 py-1 bg-dark-900/80 border border-white/10 text-white/70 text-xs rounded-full font-body">
+                  <span className="absolute top-3 left-3 px-2.5 py-1 bg-dark-900/80 border border-white/10 text-white/70 text-xs rounded-full font-body z-10">
                     {project.category}
                   </span>
                 </div>

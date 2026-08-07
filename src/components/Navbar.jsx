@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { IMAGES, SERVICES } from '../data/siteData';
 
 const NAV_LINKS = [
@@ -102,24 +103,33 @@ export default function Navbar() {
                   onMouseLeave={scheduleClose}
                 >
                   <button
-                    className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 ${
+                    className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${
                       isActive(link.href)
-                        ? 'text-white bg-white/5'
+                        ? 'text-white'
                         : 'text-white/60 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    {link.label}
-                    <svg
-                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                        servicesOpen ? 'rotate-180' : ''
-                      }`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
+                    <span className="relative z-10 flex items-center gap-1.5">
+                      {link.label}
+                      <svg
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          servicesOpen ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                    {isActive(link.href) && (
+                      <motion.span
+                        layoutId="activeNavTab"
+                        className="absolute inset-0 bg-white/5 rounded-lg border-b-2 border-primary-400"
+                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                      />
+                    )}
                   </button>
 
                   {/* Invisible bridge between button and dropdown to prevent gap-triggered close */}
@@ -173,20 +183,27 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className={`px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 ${
+                  className={`px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${
                     isActive(link.href)
-                      ? 'text-white bg-white/5'
+                      ? 'text-white'
                       : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  {link.label}
+                  <span className="relative z-10">{link.label}</span>
+                  {isActive(link.href) && (
+                    <motion.span
+                      layoutId="activeNavTab"
+                      className="absolute inset-0 bg-white/5 rounded-lg border-b-2 border-primary-400"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    />
+                  )}
                 </Link>
               )
             )}
             <div className="w-px h-5 bg-white/10 mx-2" />
             <Link
               to="/contact"
-              className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-medium rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25"
+              className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-medium rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25 hover:shadow-glow-primary hover:-translate-y-0.5 active:scale-95"
             >
               Get a Quote
             </Link>
