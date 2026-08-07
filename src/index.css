@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #050a14;
+    color: #e8edf5;
+    overflow-x: hidden;
+  }
+  ::selection { background: #1a6cff44; color: #fff; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0a1220; }
+  ::-webkit-scrollbar-thumb { background: #1a6cff; border-radius: 3px; }
+}
+
+@layer components {
+  .gradient-text {
+    background: linear-gradient(135deg, #ffffff 0%, #80aeff 50%, #00c8ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 text-white font-display font-semibold rounded-full text-sm tracking-wide transition-all duration-300 hover:bg-primary-400 hover:shadow-lg hover:shadow-primary-500/30 hover:-translate-y-0.5 active:scale-95;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-primary-500/50 text-primary-300 font-display font-semibold rounded-full text-sm tracking-wide transition-all duration-300 hover:border-primary-400 hover:text-white hover:bg-primary-500/10 hover:-translate-y-0.5;
+  }
+  .card-glass {
+    @apply bg-dark-800/60 backdrop-blur-sm border border-white/5 rounded-2xl;
+  }
+  .section-tag {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-mono font-medium tracking-widest uppercase mb-4;
+  }
+  .nav-link {
+    @apply text-sm font-body text-white/70 hover:text-white transition-colors duration-200 relative;
+  }
+}
+
+@layer utilities {
+  .text-glow { text-shadow: 0 0 30px #1a6cff88; }
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+  .circuit-bg {
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, #1a6cff0a 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, #00c8ff08 0%, transparent 40%);
+  }
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #1a6cff44, #00c8ff22, #1a6cff44);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* PCB trace animation */
+@keyframes trace {
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+.trace-anim {
+  stroke-dasharray: 1000;
+  animation: trace 3s linear forwards;
+}
+
+/* Floating particles */
+@keyframes particle-float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+  33% { transform: translate(30px, -30px) rotate(120deg); opacity: 0.8; }
+  66% { transform: translate(-20px, 20px) rotate(240deg); opacity: 0.5; }
+}
+
+/* Counter animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
