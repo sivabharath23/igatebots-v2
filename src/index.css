@@ -148,3 +148,27 @@
   content: '';
 }
 
+/* Sonar pulse animation for via nodes */
+@keyframes sonar {
+  0% {
+    r: 3px;
+    opacity: 0.8;
+  }
+  100% {
+    r: 16px;
+    opacity: 0;
+  }
+}
+.sonar-pulse {
+  animation: sonar 2.8s cubic-bezier(0.1, 0.8, 0.2, 1) infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.sonar-pulse-delayed {
+  animation: sonar 2.8s cubic-bezier(0.1, 0.8, 0.2, 1) infinite;
+  animation-delay: 1.4s;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+

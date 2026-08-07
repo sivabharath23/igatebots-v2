@@ -10,6 +10,9 @@ import { useInView, useCounter } from '../hooks/useInView';
 // ── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
   const slides = [
     {
       tag: 'Innovative Solutions',
@@ -50,15 +53,36 @@ function Hero() {
     return () => clearInterval(t);
   }, []);
 
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   const s = slides[currentSlide];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       <PCBBackground />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 50%, rgba(26,108,255,0.08) 0%, transparent 70%)' }}
       />
+      {isHovered && (
+        <div 
+          className="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-100"
+          style={{
+            background: `radial-gradient(550px circle at ${mousePos.x}px ${mousePos.y}px, rgba(26,108,255,0.14), rgba(0,200,255,0.06) 40%, transparent 80%)`
+          }}
+        />
+      )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32">
         <AnimatePresence mode="wait">

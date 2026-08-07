@@ -43,7 +43,17 @@ export default function PCBBackground({ className = '' }) {
           [350, 250], [650, 200], [850, 400], [1150, 450], [250, 700], [600, 650],
           [300, 200], [300, 550], [900, 300], [900, 650],
         ].map(([cx, cy], i) => (
-          <circle key={i} cx={cx} cy={cy} r="4" fill="#1a6cff" stroke="#00c8ff" strokeWidth="1" opacity="0.6" />
+          <g key={i}>
+            {/* Sonar wave rings for half the vias */}
+            {i % 2 === 0 && (
+              <>
+                <circle cx={cx} cy={cy} r="4" fill="none" stroke="#00c8ff" strokeWidth="1" className="sonar-pulse" />
+                <circle cx={cx} cy={cy} r="4" fill="none" stroke="#1a6cff" strokeWidth="1" className="sonar-pulse-delayed" />
+              </>
+            )}
+            {/* Main physical dot */}
+            <circle cx={cx} cy={cy} r="4.5" fill="#1a6cff" stroke="#00c8ff" strokeWidth="1.5" />
+          </g>
         ))}
         
         {/* Chip outlines */}
