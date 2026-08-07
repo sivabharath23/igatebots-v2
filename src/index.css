@@ -91,6 +91,24 @@
   animation: trace 3s linear forwards;
 }
 
+/* Continuous electron flow animation */
+@keyframes flow {
+  0% { stroke-dashoffset: 80; }
+  100% { stroke-dashoffset: 0; }
+}
+.flow-trace {
+  stroke-dasharray: 8 32;
+  animation: flow 3s linear infinite;
+}
+.flow-trace-fast {
+  stroke-dasharray: 6 24;
+  animation: flow 1.8s linear infinite;
+}
+.flow-trace-slow {
+  stroke-dasharray: 10 40;
+  animation: flow 4.5s linear infinite;
+}
+
 /* Floating particles */
 @keyframes particle-float {
   0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
