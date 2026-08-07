@@ -10,23 +10,33 @@ export default function PCBBackground({ className = '' }) {
       <div className="absolute top-3/4 left-1/2 w-64 h-64 bg-primary-400/6 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '4s' }} />
 
       {/* PCB Traces SVG */}
-      <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+      <svg className="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
         {/* Horizontal traces */}
-        <path d="M0 200 H300 L350 250 H600 L650 200 H900" stroke="#1a6cff" strokeWidth="1" opacity="0.3" />
-        <path d="M0 200 H300 L350 250 H600 L650 200 H900" stroke="#00c8ff" strokeWidth="1.5" className="flow-trace" />
+        <path d="M0 200 H300 L350 250 H600 L650 200 H900" stroke="#1a6cff" strokeWidth="1" opacity="0.35" />
+        <path d="M0 200 H300 L350 250 H600 L650 200 H900" stroke="#00c8ff" strokeWidth="2.5" strokeLinecap="round" className="flow-trace" filter="url(#glow)" />
 
-        <path d="M500 450 H800 L850 400 H1100 L1150 450 H1440" stroke="#00c8ff" strokeWidth="0.5" opacity="0.3" />
-        <path d="M500 450 H800 L850 400 H1100 L1150 450 H1440" stroke="#1a6cff" strokeWidth="1" className="flow-trace-fast" />
+        <path d="M500 450 H800 L850 400 H1100 L1150 450 H1440" stroke="#00c8ff" strokeWidth="0.5" opacity="0.35" />
+        <path d="M500 450 H800 L850 400 H1100 L1150 450 H1440" stroke="#1a6cff" strokeWidth="2" strokeLinecap="round" className="flow-trace-fast" filter="url(#glow)" />
 
-        <path d="M0 650 H200 L250 700 H550 L600 650 H800" stroke="#1a6cff" strokeWidth="1" opacity="0.3" />
-        <path d="M0 650 H200 L250 700 H550 L600 650 H800" stroke="#00c8ff" strokeWidth="1.5" className="flow-trace-slow" />
+        <path d="M0 650 H200 L250 700 H550 L600 650 H800" stroke="#1a6cff" strokeWidth="1" opacity="0.35" />
+        <path d="M0 650 H200 L250 700 H550 L600 650 H800" stroke="#00c8ff" strokeWidth="2.5" strokeLinecap="round" className="flow-trace-slow" filter="url(#glow)" />
         
         {/* Vertical traces */}
-        <path d="M300 0 V200 L350 250 V500 L300 550 V900" stroke="#1a6cff" strokeWidth="0.5" opacity="0.3" />
-        <path d="M300 0 V200 L350 250 V500 L300 550 V900" stroke="#00c8ff" strokeWidth="1" className="flow-trace-fast" />
+        <path d="M300 0 V200 L350 250 V500 L300 550 V900" stroke="#1a6cff" strokeWidth="0.5" opacity="0.35" />
+        <path d="M300 0 V200 L350 250 V500 L300 550 V900" stroke="#00c8ff" strokeWidth="2" strokeLinecap="round" className="flow-trace-fast" filter="url(#glow)" />
 
-        <path d="M900 100 V300 L950 350 V600 L900 650 V900" stroke="#00c8ff" strokeWidth="1" opacity="0.3" />
-        <path d="M900 100 V300 L950 350 V600 L900 650 V900" stroke="#1a6cff" strokeWidth="1.5" className="flow-trace" />
+        <path d="M900 100 V300 L950 350 V600 L900 650 V900" stroke="#00c8ff" strokeWidth="1" opacity="0.35" />
+        <path d="M900 100 V300 L950 350 V600 L900 650 V900" stroke="#1a6cff" strokeWidth="2.5" strokeLinecap="round" className="flow-trace" filter="url(#glow)" />
         
         {/* Via dots */}
         {[
