@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { IMAGES, SERVICES } from '../data/siteData';
+import { motion, AnimatePresence } from 'framer-motion';
+import { IMAGES, SERVICES, COMPANY } from '../data/siteData';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -43,7 +43,6 @@ const SERVICE_ICONS = {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
   const dropdownRef = useRef(null);
@@ -58,11 +57,10 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileOpen(false);
-    setMobileServicesOpen(false);
     setServicesOpen(false);
   }, [location.pathname]);
 
-  // Lock body scroll when mobile menu is open to prevent background bleed and scrolling
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
@@ -91,26 +89,18 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Mobile Backdrop Overlay to prevent background clicks and visual clash */}
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[90] lg:hidden transition-opacity duration-300"
-          onClick={() => setMobileOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
+      {/* ── Desktop & Main Navigation Bar ────────────────────────────────────────── */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-          scrolled || mobileOpen
-            ? 'bg-dark-900/98 backdrop-blur-2xl border-b border-white/10 py-3 shadow-2xl shadow-black/80'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-dark-900/98 backdrop-blur-xl border-b border-white/10 py-3 shadow-xl'
             : 'bg-transparent py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center group relative z-[101]">
+            <Link to="/" className="flex items-center group">
               <img
                 src={IMAGES.logo}
                 alt="iGatebots"
@@ -162,7 +152,7 @@ export default function Navbar() {
                       )}
                     </button>
 
-                    {/* Invisible bridge between button and dropdown to prevent gap-triggered close */}
+                    {/* Invisible bridge to prevent gap-triggered close */}
                     {servicesOpen && (
                       <div className="absolute top-full left-0 right-0 h-3 z-10" />
                     )}
@@ -171,27 +161,27 @@ export default function Navbar() {
                       ref={dropdownRef}
                       onMouseEnter={openDropdown}
                       onMouseLeave={scheduleClose}
-                      className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-80 transition-all duration-200 z-50 ${
+                      className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-88 max-w-[90vw] transition-all duration-200 z-50 ${
                         servicesOpen
                           ? 'opacity-100 translate-y-0 pointer-events-auto'
                           : 'opacity-0 -translate-y-2 pointer-events-none'
                       }`}
                     >
-                      <div className="bg-dark-800 border border-white/8 rounded-2xl p-2 shadow-2xl shadow-black/60">
+                      <div className="bg-dark-800 border border-white/10 rounded-2xl p-2 shadow-2xl shadow-black/80 max-h-[calc(100vh-6rem)] overflow-y-auto">
                         {SERVICES.map((s) => (
                           <Link
                             key={s.id}
                             to={`/services/${s.slug}`}
-                            className="flex items-center gap-4 px-4 py-3.5 rounded-xl hover:bg-primary-500/10 transition-colors duration-150 group/item"
+                            className="flex items-center gap-3.5 px-4 py-3 rounded-xl hover:bg-primary-500/10 transition-colors duration-150 group/item"
                           >
                             <div className="w-9 h-9 rounded-lg bg-primary-500/10 border border-primary-500/20 flex items-center justify-center text-primary-400 shrink-0 group-hover/item:bg-primary-500/20 transition-colors">
                               {SERVICE_ICONS[s.slug]}
                             </div>
-                            <div>
-                              <p className="text-sm font-body font-medium text-white/85 group-hover/item:text-white transition-colors leading-tight">
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm font-body font-medium text-white/90 group-hover/item:text-white transition-colors leading-tight truncate">
                                 {s.title}
                               </p>
-                              <p className="text-xs text-white/35 mt-0.5">{s.subtitle}</p>
+                              <p className="text-xs text-white/40 mt-0.5 truncate">{s.subtitle}</p>
                             </div>
                           </Link>
                         ))}
@@ -241,117 +231,194 @@ export default function Navbar() {
 
             {/* Mobile hamburger button */}
             <button
-              className="lg:hidden p-2.5 rounded-xl border border-white/15 bg-white/5 text-white/80 hover:text-white hover:bg-white/10 transition-colors relative z-[101]"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle navigation menu"
+              className="lg:hidden p-2.5 rounded-xl border border-white/15 bg-white/5 text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open navigation menu"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                {mobileOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                )}
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             </button>
           </div>
-
-          {/* Mobile menu drawer */}
-          <div
-            className={`lg:hidden transition-all duration-300 ease-out overflow-hidden ${
-              mobileOpen
-                ? 'max-h-[calc(100dvh-5rem)] mt-3 opacity-100 pointer-events-auto'
-                : 'max-h-0 opacity-0 pointer-events-none'
-            }`}
-          >
-            <div className="bg-dark-900/98 border border-white/15 rounded-2xl p-4 shadow-2xl shadow-black/90 flex flex-col gap-2 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain">
-              {NAV_LINKS.map((link) =>
-                link.hasDropdown ? (
-                  <div key={link.label} className="rounded-xl bg-white/5 border border-white/5 overflow-hidden">
-                    <button
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                      className="w-full flex items-center justify-between px-4 py-3.5 text-sm font-body text-white font-medium"
-                    >
-                      <span className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-primary-400" />
-                        {link.label}
-                      </span>
-                      <svg
-                        className={`w-4 h-4 text-primary-400 transition-transform duration-200 ${
-                          mobileServicesOpen ? 'rotate-180' : ''
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-
-                    {mobileServicesOpen && (
-                      <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
-                        {SERVICES.map((s) => (
-                          <Link
-                            key={s.id}
-                            to={`/services/${s.slug}`}
-                            className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-primary-500/10 active:bg-primary-500/20 transition-colors"
-                          >
-                            <div className="w-7 h-7 rounded-lg bg-primary-500/15 border border-primary-500/25 flex items-center justify-center text-primary-400 shrink-0">
-                              {SERVICE_ICONS[s.slug]}
-                            </div>
-                            <div>
-                              <span className="text-sm text-white font-body font-medium block leading-tight">
-                                {s.title}
-                              </span>
-                              <span className="text-[11px] text-white/40 block mt-0.5">
-                                {s.subtitle}
-                              </span>
-                            </div>
-                          </Link>
-                        ))}
-                        <Link
-                          to="/services"
-                          className="flex items-center justify-center gap-1.5 py-2 text-xs text-primary-300 font-medium font-body hover:text-white transition-colors"
-                        >
-                          View all services &rarr;
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    className={`px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
-                      isActive(link.href)
-                        ? 'bg-primary-500/20 border border-primary-500/30 text-white'
-                        : 'text-white/70 hover:text-white hover:bg-white/5'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              )}
-
-              {/* Action buttons at bottom of mobile menu */}
-              <div className="pt-3 border-t border-white/10 mt-2 grid grid-cols-2 gap-2">
-                <Link
-                  to="/consultation"
-                  className="flex items-center justify-center gap-1 px-3 py-3 border border-primary-500/40 text-primary-300 hover:text-white hover:bg-primary-500/10 text-xs font-body font-semibold rounded-xl transition-all text-center"
-                >
-                  Consultation
-                </Link>
-                <Link
-                  to="/contact"
-                  className="flex items-center justify-center gap-1 px-3 py-3 bg-primary-500 hover:bg-primary-400 text-white text-xs font-body font-semibold rounded-xl transition-all text-center shadow-lg shadow-primary-500/25"
-                >
-                  Get a Quote
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </nav>
+
+      {/* ── Slide-Out Mobile Navigation Drawer ───────────────────────────────────── */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[999] lg:hidden"
+              onClick={() => setMobileOpen(false)}
+              aria-hidden="true"
+            />
+
+            {/* Slide-out Sidebar Panel */}
+            <motion.aside
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[380px] max-w-[92vw] h-full bg-dark-900 border-l border-white/10 z-[1000] lg:hidden flex flex-col shadow-2xl shadow-black"
+            >
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-dark-900/95 shrink-0">
+                <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center">
+                  <img src={IMAGES.logo} alt="iGatebots" className="h-9 w-auto" />
+                </Link>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="p-2 rounded-xl bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                  aria-label="Close menu"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Drawer Scrollable Content */}
+              <div className="flex-1 overflow-y-auto px-4 py-4 space-y-2 overscroll-contain">
+                {/* Main Links */}
+                <Link
+                  to="/"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
+                    isActive('/')
+                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                      : 'text-white/80 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  Home
+                </Link>
+
+                <Link
+                  to="/about"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
+                    isActive('/about')
+                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                      : 'text-white/80 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  About Us
+                </Link>
+
+                {/* All 5 Services Section */}
+                <div className="rounded-2xl bg-dark-800/80 border border-white/8 p-3 space-y-1">
+                  <div className="flex items-center justify-between px-2 py-1.5 mb-1">
+                    <span className="text-xs font-mono uppercase text-primary-400 font-semibold tracking-wider flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
+                      Our Services ({SERVICES.length})
+                    </span>
+                    <Link
+                      to="/services"
+                      onClick={() => setMobileOpen(false)}
+                      className="text-xs text-primary-400 hover:text-primary-300 font-body font-medium"
+                    >
+                      View All &rarr;
+                    </Link>
+                  </div>
+
+                  {SERVICES.map((s) => (
+                    <Link
+                      key={s.id}
+                      to={`/services/${s.slug}`}
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-primary-500/10 active:bg-primary-500/20 transition-all group"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-primary-500/15 border border-primary-500/25 flex items-center justify-center text-primary-400 shrink-0 group-hover:bg-primary-500/25 transition-colors">
+                        {SERVICE_ICONS[s.slug]}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-body font-medium text-white group-hover:text-primary-300 transition-colors leading-tight">
+                          {s.title}
+                        </p>
+                        <p className="text-[11px] text-white/40 mt-0.5 truncate">
+                          {s.subtitle}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                <Link
+                  to="/consultation"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
+                    isActive('/consultation')
+                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                      : 'text-white/80 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  <span>Consultation</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 bg-primary-500/20 text-primary-300 rounded-full border border-primary-500/30">
+                    NEW
+                  </span>
+                </Link>
+
+                <Link
+                  to="/projects"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
+                    isActive('/projects')
+                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                      : 'text-white/80 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  Projects & Portfolio
+                </Link>
+
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
+                    isActive('/contact')
+                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                      : 'text-white/80 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  Contact Us
+                </Link>
+              </div>
+
+              {/* Drawer Bottom Actions */}
+              <div className="p-4 border-t border-white/10 bg-dark-900/95 shrink-0 space-y-2.5">
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    to="/consultation"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-center py-3 px-2 border border-primary-500/40 text-primary-300 hover:text-white hover:bg-primary-500/10 text-xs font-body font-semibold rounded-xl transition-all text-center"
+                  >
+                    Book Advisory
+                  </Link>
+                  <Link
+                    to="/contact"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-center py-3 px-2 bg-primary-500 hover:bg-primary-400 text-white text-xs font-body font-semibold rounded-xl transition-all text-center shadow-lg shadow-primary-500/25"
+                  >
+                    Get a Quote
+                  </Link>
+                </div>
+                <a
+                  href={`tel:${COMPANY.phone}`}
+                  className="flex items-center justify-center gap-2 text-xs text-white/50 hover:text-primary-300 py-1 transition-colors font-body"
+                >
+                  <svg className="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </svg>
+                  {COMPANY.phone}
+                </a>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }
