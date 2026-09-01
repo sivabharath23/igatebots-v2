@@ -43,6 +43,7 @@ const SERVICE_ICONS = {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
   const dropdownRef = useRef(null);
@@ -57,8 +58,21 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileOpen(false);
+    setMobileServicesOpen(false);
     setServicesOpen(false);
   }, [location.pathname]);
+
+  // Lock body scroll when mobile menu is open to prevent background bleed and scrolling
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
 
   // Cleanup timer on unmount
   useEffect(() => () => clearTimeout(closeTimer.current), []);
@@ -76,50 +90,194 @@ export default function Navbar() {
     href === '/' ? location.pathname === '/' : location.pathname.startsWith(href);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-dark-900/98 backdrop-blur-xl border-b border-white/5 py-3'
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center group">
-            <img
-              src={IMAGES.logo}
-              alt="iGatebots"
-              className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
-              onError={(e) => {
-                e.target.style.display = 'none';
-              }}
-            />
-          </Link>
+    <>
+      {/* Mobile Backdrop Overlay to prevent background clicks and visual clash */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[90] lg:hidden transition-opacity duration-300"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+      )}
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
-            {NAV_LINKS.map((link) =>
-              link.hasDropdown ? (
-                <div
-                  key={link.label}
-                  className="relative"
-                  ref={triggerRef}
-                  onMouseEnter={openDropdown}
-                  onMouseLeave={scheduleClose}
-                >
-                  <button
-                    className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${
+      <nav
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+          scrolled || mobileOpen
+            ? 'bg-dark-900/98 backdrop-blur-2xl border-b border-white/10 py-3 shadow-2xl shadow-black/80'
+            : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link to="/" className="flex items-center group relative z-[101]">
+              <img
+                src={IMAGES.logo}
+                alt="iGatebots"
+                className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+            </Link>
+
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center gap-1">
+              {NAV_LINKS.map((link) =>
+                link.hasDropdown ? (
+                  <div
+                    key={link.label}
+                    className="relative"
+                    ref={triggerRef}
+                    onMouseEnter={openDropdown}
+                    onMouseLeave={scheduleClose}
+                  >
+                    <button
+                      className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${
+                        isActive(link.href)
+                          ? 'text-white'
+                          : 'text-white/60 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      <span className="relative z-10 flex items-center gap-1.5">
+                        {link.label}
+                        <svg
+                          className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                            servicesOpen ? 'rotate-180' : ''
+                          }`}
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </span>
+                      {isActive(link.href) && (
+                        <motion.span
+                          layoutId="activeNavTab"
+                          className="absolute inset-0 bg-white/5 rounded-lg border-b-2 border-primary-400"
+                          transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                        />
+                      )}
+                    </button>
+
+                    {/* Invisible bridge between button and dropdown to prevent gap-triggered close */}
+                    {servicesOpen && (
+                      <div className="absolute top-full left-0 right-0 h-3 z-10" />
+                    )}
+
+                    <div
+                      ref={dropdownRef}
+                      onMouseEnter={openDropdown}
+                      onMouseLeave={scheduleClose}
+                      className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-80 transition-all duration-200 z-50 ${
+                        servicesOpen
+                          ? 'opacity-100 translate-y-0 pointer-events-auto'
+                          : 'opacity-0 -translate-y-2 pointer-events-none'
+                      }`}
+                    >
+                      <div className="bg-dark-800 border border-white/8 rounded-2xl p-2 shadow-2xl shadow-black/60">
+                        {SERVICES.map((s) => (
+                          <Link
+                            key={s.id}
+                            to={`/services/${s.slug}`}
+                            className="flex items-center gap-4 px-4 py-3.5 rounded-xl hover:bg-primary-500/10 transition-colors duration-150 group/item"
+                          >
+                            <div className="w-9 h-9 rounded-lg bg-primary-500/10 border border-primary-500/20 flex items-center justify-center text-primary-400 shrink-0 group-hover/item:bg-primary-500/20 transition-colors">
+                              {SERVICE_ICONS[s.slug]}
+                            </div>
+                            <div>
+                              <p className="text-sm font-body font-medium text-white/85 group-hover/item:text-white transition-colors leading-tight">
+                                {s.title}
+                              </p>
+                              <p className="text-xs text-white/35 mt-0.5">{s.subtitle}</p>
+                            </div>
+                          </Link>
+                        ))}
+                        <div className="mt-2 pt-2 border-t border-white/5 px-2">
+                          <Link
+                            to="/services"
+                            className="flex items-center justify-between px-4 py-2.5 rounded-xl text-xs text-primary-400 hover:text-primary-300 hover:bg-primary-500/5 transition-colors font-medium"
+                          >
+                            View all services
+                            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className={`px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${
                       isActive(link.href)
                         ? 'text-white'
                         : 'text-white/60 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <span className="relative z-10 flex items-center gap-1.5">
-                      {link.label}
+                    <span className="relative z-10">{link.label}</span>
+                    {isActive(link.href) && (
+                      <motion.span
+                        layoutId="activeNavTab"
+                        className="absolute inset-0 bg-white/5 rounded-lg border-b-2 border-primary-400"
+                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                )
+              )}
+              <div className="w-px h-5 bg-white/10 mx-2" />
+              <Link
+                to="/contact"
+                className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-medium rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25 hover:shadow-glow-primary hover:-translate-y-0.5 active:scale-95"
+              >
+                Get a Quote
+              </Link>
+            </div>
+
+            {/* Mobile hamburger button */}
+            <button
+              className="lg:hidden p-2.5 rounded-xl border border-white/15 bg-white/5 text-white/80 hover:text-white hover:bg-white/10 transition-colors relative z-[101]"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle navigation menu"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                {mobileOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                )}
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile menu drawer */}
+          <div
+            className={`lg:hidden transition-all duration-300 ease-out overflow-hidden ${
+              mobileOpen
+                ? 'max-h-[calc(100dvh-5rem)] mt-3 opacity-100 pointer-events-auto'
+                : 'max-h-0 opacity-0 pointer-events-none'
+            }`}
+          >
+            <div className="bg-dark-900/98 border border-white/15 rounded-2xl p-4 shadow-2xl shadow-black/90 flex flex-col gap-2 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain">
+              {NAV_LINKS.map((link) =>
+                link.hasDropdown ? (
+                  <div key={link.label} className="rounded-xl bg-white/5 border border-white/5 overflow-hidden">
+                    <button
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      className="w-full flex items-center justify-between px-4 py-3.5 text-sm font-body text-white font-medium"
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-primary-400" />
+                        {link.label}
+                      </span>
                       <svg
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          servicesOpen ? 'rotate-180' : ''
+                        className={`w-4 h-4 text-primary-400 transition-transform duration-200 ${
+                          mobileServicesOpen ? 'rotate-180' : ''
                         }`}
                         fill="none"
                         viewBox="0 0 24 24"
@@ -128,160 +286,72 @@ export default function Navbar() {
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
-                    </span>
-                    {isActive(link.href) && (
-                      <motion.span
-                        layoutId="activeNavTab"
-                        className="absolute inset-0 bg-white/5 rounded-lg border-b-2 border-primary-400"
-                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                      />
-                    )}
-                  </button>
+                    </button>
 
-                  {/* Invisible bridge between button and dropdown to prevent gap-triggered close */}
-                  {servicesOpen && (
-                    <div className="absolute top-full left-0 right-0 h-3 z-10" />
-                  )}
-
-                  <div
-                    ref={dropdownRef}
-                    onMouseEnter={openDropdown}
-                    onMouseLeave={scheduleClose}
-                    className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-80 transition-all duration-200 z-50 ${
-                      servicesOpen
-                        ? 'opacity-100 translate-y-0 pointer-events-auto'
-                        : 'opacity-0 -translate-y-2 pointer-events-none'
-                    }`}
-                  >
-                    <div className="bg-dark-800 border border-white/8 rounded-2xl p-2 shadow-2xl shadow-black/60">
-                      {SERVICES.map((s) => (
-                        <Link
-                          key={s.id}
-                          to={`/services/${s.slug}`}
-                          className="flex items-center gap-4 px-4 py-3.5 rounded-xl hover:bg-primary-500/10 transition-colors duration-150 group/item"
-                        >
-                          <div className="w-9 h-9 rounded-lg bg-primary-500/10 border border-primary-500/20 flex items-center justify-center text-primary-400 shrink-0 group-hover/item:bg-primary-500/20 transition-colors">
-                            {SERVICE_ICONS[s.slug]}
-                          </div>
-                          <div>
-                            <p className="text-sm font-body font-medium text-white/85 group-hover/item:text-white transition-colors leading-tight">
-                              {s.title}
-                            </p>
-                            <p className="text-xs text-white/35 mt-0.5">{s.subtitle}</p>
-                          </div>
-                        </Link>
-                      ))}
-                      <div className="mt-2 pt-2 border-t border-white/5 px-2">
+                    {mobileServicesOpen && (
+                      <div className="px-2 pb-2 space-y-1 border-t border-white/5 pt-2">
+                        {SERVICES.map((s) => (
+                          <Link
+                            key={s.id}
+                            to={`/services/${s.slug}`}
+                            className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-primary-500/10 active:bg-primary-500/20 transition-colors"
+                          >
+                            <div className="w-7 h-7 rounded-lg bg-primary-500/15 border border-primary-500/25 flex items-center justify-center text-primary-400 shrink-0">
+                              {SERVICE_ICONS[s.slug]}
+                            </div>
+                            <div>
+                              <span className="text-sm text-white font-body font-medium block leading-tight">
+                                {s.title}
+                              </span>
+                              <span className="text-[11px] text-white/40 block mt-0.5">
+                                {s.subtitle}
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
                         <Link
                           to="/services"
-                          className="flex items-center justify-between px-4 py-2.5 rounded-xl text-xs text-primary-400 hover:text-primary-300 hover:bg-primary-500/5 transition-colors font-medium"
+                          className="flex items-center justify-center gap-1.5 py-2 text-xs text-primary-300 font-medium font-body hover:text-white transition-colors"
                         >
-                          View all services
-                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
+                          View all services &rarr;
                         </Link>
                       </div>
-                    </div>
+                    )}
                   </div>
-                </div>
-              ) : (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className={`px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${
-                    isActive(link.href)
-                      ? 'text-white'
-                      : 'text-white/60 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  <span className="relative z-10">{link.label}</span>
-                  {isActive(link.href) && (
-                    <motion.span
-                      layoutId="activeNavTab"
-                      className="absolute inset-0 bg-white/5 rounded-lg border-b-2 border-primary-400"
-                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                    />
-                  )}
-                </Link>
-              )
-            )}
-            <div className="w-px h-5 bg-white/10 mx-2" />
-            <Link
-              to="/contact"
-              className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-medium rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25 hover:shadow-glow-primary hover:-translate-y-0.5 active:scale-95"
-            >
-              Get a Quote
-            </Link>
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden p-2.5 rounded-lg border border-white/10 text-white/60 hover:text-white hover:bg-white/5 transition-colors"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              {mobileOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile menu */}
-        <div
-          className={`lg:hidden overflow-hidden transition-all duration-300 ${
-            mobileOpen ? 'max-h-screen mt-4 opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="bg-dark-800/98 border border-white/8 rounded-2xl p-3 flex flex-col gap-1">
-            {NAV_LINKS.map((link) =>
-              link.hasDropdown ? (
-                <div key={link.label}>
-                  <p className="px-4 py-2 text-xs font-body text-white/30 uppercase tracking-widest">
+                ) : (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className={`px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
+                      isActive(link.href)
+                        ? 'bg-primary-500/20 border border-primary-500/30 text-white'
+                        : 'text-white/70 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
                     {link.label}
-                  </p>
-                  {SERVICES.map((s) => (
-                    <Link
-                      key={s.id}
-                      to={`/services/${s.slug}`}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary-500/8 transition-colors"
-                    >
-                      <div className="w-7 h-7 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-400 shrink-0">
-                        {SERVICE_ICONS[s.slug]}
-                      </div>
-                      <span className="text-sm text-white/70 font-body">{s.title}</span>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
+                  </Link>
+                )
+              )}
+
+              {/* Action buttons at bottom of mobile menu */}
+              <div className="pt-3 border-t border-white/10 mt-2 grid grid-cols-2 gap-2">
                 <Link
-                  key={link.label}
-                  to={link.href}
-                  className={`px-4 py-3 rounded-xl text-sm font-body transition-colors ${
-                    isActive(link.href)
-                      ? 'bg-primary-500/10 text-white'
-                      : 'text-white/60 hover:text-white hover:bg-white/5'
-                  }`}
+                  to="/consultation"
+                  className="flex items-center justify-center gap-1 px-3 py-3 border border-primary-500/40 text-primary-300 hover:text-white hover:bg-primary-500/10 text-xs font-body font-semibold rounded-xl transition-all text-center"
                 >
-                  {link.label}
+                  Consultation
                 </Link>
-              )
-            )}
-            <div className="pt-2 border-t border-white/5 mt-1">
-              <Link
-                to="/contact"
-                className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-primary-500 text-white text-sm font-body font-medium rounded-xl transition-all"
-              >
-                Get a Quote
-              </Link>
+                <Link
+                  to="/contact"
+                  className="flex items-center justify-center gap-1 px-3 py-3 bg-primary-500 hover:bg-primary-400 text-white text-xs font-body font-semibold rounded-xl transition-all text-center shadow-lg shadow-primary-500/25"
+                >
+                  Get a Quote
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
