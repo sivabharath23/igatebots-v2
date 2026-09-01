@@ -6,6 +6,7 @@ import productDesign from '../assets/img/har.jpg';
 import electricCircuit from '../assets/img/electric.jpg';
 import pcbDesign from '../assets/img/des.jpg';
 import reverseEngineering from '../assets/img/har.jpg';
+import consultationImg from '../assets/img/ce.jpg';
 import project1 from '../assets/img/project/single-project.jpg';
 import project2 from '../assets/img/project/single-project-2.jpg';
 import project3 from '../assets/img/project/single-project-3.jpg';
@@ -26,6 +27,7 @@ export const IMAGES = {
   electricCircuit,
   pcbDesign,
   reverseEngineering,
+  consultation: consultationImg,
   project1,
   project2,
   project3,
@@ -40,10 +42,26 @@ export const IMAGES = {
 export const COMPANY = {
   name: 'iGatebots',
   tagline: 'Engineering the Future',
-  description: 'iGatebots is at the forefront of electronic innovation, offering expert solutions in product design, circuit design, PCB design, and reverse engineering. We are committed to turning your electronic ideas into reality with precision and expertise.',
-  address: '374, 8th Cross, GPR Royale Layout, Electronic City Phase 2, Bangalore, Karnataka 560100',
+  description: 'iGatebots is at the forefront of electronic innovation, offering expert solutions in product design, circuit design, PCB design, reverse engineering, and engineering consultation. We are committed to turning your electronic ideas into reality with precision and expertise.',
+  address: '#374, 8th Cross, GPR Royale Layout, Electronic City Phase 2, Bangalore, Karnataka 560100',
+  address1: '#374, 8th Cross, GPR Royale Layout, Electronic City Phase 2, Bangalore, Karnataka 560100',
+  address2: '10/65-1, Lakshmi Bhavan, Vellaiyanthoppu, Chanthaiyadi Post, Kanyakumari, Tamil Nadu 629703',
+  addresses: [
+    {
+      title: 'Bangalore Office',
+      tag: 'Address 1',
+      address: '#374, 8th Cross, GPR Royale Layout, Electronic City Phase 2, Bangalore, Karnataka 560100',
+    },
+    {
+      title: 'Kanyakumari Office',
+      tag: 'Address 2',
+      address: '10/65-1, Lakshmi Bhavan, Vellaiyanthoppu, Chanthaiyadi Post, Kanyakumari, Tamil Nadu 629703',
+    },
+  ],
   email: 'info@igatebots.com',
-  phone: '+91 1234567890',
+  phone: '+91 8903474569',
+  phoneRaw: '8903474569',
+  mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.019796375012!2d77.6836071!3d12.841997200000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae6d0009b178cb%3A0x5955abd4ad29361!2sGpr%20royale%20layout!5e0!3m2!1sen!2sin!4v1788278155757!5m2!1sen!2sin',
   founded: '2015',
 };
 
@@ -91,6 +109,17 @@ export const SERVICES = [
     icon: 'reverse',
     features: ['Hardware Analysis', 'Schematic Recreation', 'BOM Generation', 'Firmware Analysis', 'Product Cloning', 'Failure Analysis'],
     slug: 'reverse-engineering',
+  },
+  {
+    id: 'consultation',
+    title: 'Engineering Consultation & Advisory',
+    subtitle: 'Strategic Technical Guidance',
+    description: 'Expert 1-on-1 technical advisory, hardware feasibility audits, PCB DFM reviews, and supply chain BOM optimization.',
+    longDesc: 'Our engineering consultation service bridges the gap between vision and technical execution. Whether validating a hardware concept, debugging prototype failures, optimizing high-speed board stackups, or preparing for CE/FCC certification, our veteran hardware architects provide direct, actionable guidance.',
+    image: IMAGES.consultation,
+    icon: 'consultation',
+    features: ['Hardware Feasibility Audits', 'Architecture & MCU/SoC Selection', 'PCB DFM & Stackup Review', 'Signal & Power Integrity Advisory', 'BOM Cost & Sourcing Strategy', 'Pre-Compliance & Certification Prep'],
+    slug: 'consultation',
   },
 ];
 
@@ -179,6 +208,7 @@ export const NAV_LINKS = [
     href: '/services',
     dropdown: SERVICES.map(s => ({ label: s.title, href: `/services/${s.slug}` })),
   },
+  { label: 'Consultation', href: '/consultation' },
   { label: 'Projects', href: '/projects' },
   { label: 'Contact', href: '/contact' },
 ];

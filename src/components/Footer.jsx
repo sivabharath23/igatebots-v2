@@ -84,16 +84,28 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display font-semibold text-white text-sm mb-5 tracking-wide">Contact</h4>
+            <h4 className="font-display font-semibold text-white text-sm mb-5 tracking-wide">Our Offices</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <svg className="w-4 h-4 text-primary-400/60 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
-                <span className="text-white/40 text-sm font-body leading-relaxed">{COMPANY.address}</span>
+                <div>
+                  <span className="text-primary-400 text-xs font-mono uppercase block mb-0.5">Bangalore</span>
+                  <span className="text-white/40 text-xs font-body leading-relaxed">{COMPANY.address1}</span>
+                </div>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-start gap-3">
+                <svg className="w-4 h-4 text-primary-400/60 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+                <div>
+                  <span className="text-primary-400 text-xs font-mono uppercase block mb-0.5">Kanyakumari</span>
+                  <span className="text-white/40 text-xs font-body leading-relaxed">{COMPANY.address2}</span>
+                </div>
+              </li>
+              <li className="flex items-center gap-3 pt-1 border-t border-white/5">
                 <svg className="w-4 h-4 text-primary-400/60 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>

@@ -183,15 +183,28 @@ export default function About() {
                 Our team of expert engineers and designers brings decades of combined experience in product design, electronics, PCB layout, and reverse engineering. We believe in a collaborative approach — your vision, our expertise, exceptional results.
               </p>
 
-              <div className="bg-dark-800/60 border border-white/8 rounded-xl p-5 mb-8">
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-primary-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                  </svg>
-                  <div>
-                    <p className="text-white/60 text-sm font-body font-medium mb-1">Head Office</p>
-                    <p className="text-white/35 text-sm font-body">{COMPANY.address}</p>
+              <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                <div className="bg-dark-800/60 border border-white/8 rounded-xl p-4">
+                  <div className="flex items-start gap-3">
+                    <svg className="w-5 h-5 text-primary-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                    </svg>
+                    <div>
+                      <p className="text-white/70 text-xs font-mono uppercase font-semibold mb-1">Bangalore Office</p>
+                      <p className="text-white/40 text-xs font-body leading-relaxed">{COMPANY.address1}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-dark-800/60 border border-white/8 rounded-xl p-4">
+                  <div className="flex items-start gap-3">
+                    <svg className="w-5 h-5 text-primary-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    <div>
+                      <p className="text-white/70 text-xs font-mono uppercase font-semibold mb-1">Kanyakumari Office</p>
+                      <p className="text-white/40 text-xs font-body leading-relaxed">{COMPANY.address2}</p>
+                    </div>
                   </div>
                 </div>
               </div>

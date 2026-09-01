@@ -46,6 +46,14 @@ function Hero() {
       desc: 'Comprehensive reverse engineering services to understand, replicate, or improve existing products.',
       link: '/services/reverse-engineering',
     },
+    {
+      tag: 'Strategic Advisory',
+      title: 'Engineering',
+      accent: 'Consultation',
+      sub: 'Expert guidance from concept to production',
+      desc: '1-on-1 technical advisory, architecture audits, PCB DFM reviews, and BOM optimization to accelerate your hardware roadmap.',
+      link: '/consultation',
+    },
   ];
 
   useEffect(() => {
@@ -249,8 +257,9 @@ function AboutSection() {
               Our core services include{' '}
               <span className="text-white/70">Product Design & Development</span>,{' '}
               <span className="text-white/70">Electronics Circuit Design</span>,{' '}
-              <span className="text-white/70">PCB Design</span>, and{' '}
-              <span className="text-white/70">Reverse Engineering</span> — all engineered for performance, reliability, and efficiency.
+              <span className="text-white/70">PCB Design</span>,{' '}
+              <span className="text-white/70">Reverse Engineering</span>, and{' '}
+              <span className="text-white/70">Engineering Consultation</span> — all engineered for performance, reliability, and efficiency.
             </p>
             <div className="grid grid-cols-2 gap-3 mb-8">
               {['Industry Standards', 'Quality Engineering', 'Expert Team', 'Affordable Pricing'].map((f) => (
@@ -295,7 +304,7 @@ function ServicesSection() {
           </h2>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((service, i) => (
             <AnimatedSection key={service.id} delay={i * 80}>
               <ServiceCard service={service} />

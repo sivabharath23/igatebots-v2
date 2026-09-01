@@ -94,7 +94,7 @@ export default function Services() {
             <h2 className="font-display text-4xl font-bold text-white mb-4">Need a Custom Solution?</h2>
             <p className="text-white/45 mb-8 font-body">Our team is ready to discuss your specific requirements and create a tailored engineering plan.</p>
             <Link
-              to="/contact"
+              to="/consultation"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25"
             >
               Request a Consultation
