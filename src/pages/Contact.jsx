@@ -12,8 +12,18 @@ const contactInfo = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
-    label: 'Visit Us',
-    value: COMPANY.address,
+    label: 'Address 1 (Bangalore Office)',
+    value: COMPANY.address1,
+    link: null,
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    label: 'Address 2 (Kanyakumari Office)',
+    value: COMPANY.address2,
     link: null,
   },
   {
@@ -114,15 +124,15 @@ export default function Contact() {
 
               {/* Map */}
               <AnimatedSection direction="left" delay={400}>
-                <div className="rounded-2xl overflow-hidden h-48 border border-white/10">
+                <div className="rounded-2xl overflow-hidden h-56 border border-white/10">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.90089930093!2d77.46612614452614!3d12.953945614144494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1722176137888!5m2!1sen!2sin"
+                    src={COMPANY.mapEmbedUrl}
                     width="100%"
                     height="100%"
-                    style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }}
+                    style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
+                    referrerPolicy="strict-origin-when-cross-origin"
                     title="iGatebots Location"
                   />
                 </div>
