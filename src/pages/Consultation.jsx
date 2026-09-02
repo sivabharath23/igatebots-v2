@@ -1477,7 +1477,8 @@ export default function Consultation() {
                         placeholder="e.g. Arun Kumar"
                         value={applicantForm.name}
                         onChange={(e) => setApplicantForm({ ...applicantForm, name: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
                       />
                     </div>
                     <div>
@@ -1490,7 +1491,8 @@ export default function Consultation() {
                         placeholder="e.g. arun.kumar@gmail.com"
                         value={applicantForm.email}
                         onChange={(e) => setApplicantForm({ ...applicantForm, email: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
                       />
                     </div>
                   </div>
@@ -1507,7 +1509,8 @@ export default function Consultation() {
                         placeholder="e.g. +91 98765 43210"
                         value={applicantForm.phone}
                         onChange={(e) => setApplicantForm({ ...applicantForm, phone: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
                       />
                     </div>
                     <div>
@@ -1517,7 +1520,7 @@ export default function Consultation() {
                       <select
                         value={applicantForm.experience}
                         onChange={(e) => setApplicantForm({ ...applicantForm, experience: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
                         style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
                       >
                         <option value="1-2 Years" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>1 - 2 Years Experience</option>
@@ -1540,7 +1543,8 @@ export default function Consultation() {
                         required
                         value={applicantForm.location}
                         onChange={(e) => setApplicantForm({ ...applicantForm, location: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
                       />
                     </div>
                     <div>
@@ -1550,7 +1554,7 @@ export default function Consultation() {
                       <select
                         value={applicantForm.noticePeriod}
                         onChange={(e) => setApplicantForm({ ...applicantForm, noticePeriod: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
                         style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
                       >
                         <option value="Immediate / Serving Notice" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>Immediate / Serving Notice</option>
@@ -1572,7 +1576,8 @@ export default function Consultation() {
                       required
                       value={applicantForm.portfolioUrl}
                       onChange={(e) => setApplicantForm({ ...applicantForm, portfolioUrl: e.target.value })}
-                      className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                      className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
                     />
                   </div>
 
@@ -1586,7 +1591,8 @@ export default function Consultation() {
                       placeholder="e.g. Altium Designer (6-layer boards), STM32CubeIDE, KiCad, CAN bus debugging, DFM checks..."
                       value={applicantForm.notes}
                       onChange={(e) => setApplicantForm({ ...applicantForm, notes: e.target.value })}
-                      className="w-full bg-dark-950 border border-white/20 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all resize-none"
+                      style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                      className="w-full bg-[#0b1329] border border-white/20 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all resize-none"
                     />
                   </div>
 
@@ -1612,7 +1618,8 @@ export default function Consultation() {
                         placeholder="e.g. Acme Technologies Ltd"
                         value={companyForm.companyName}
                         onChange={(e) => setCompanyForm({ ...companyForm, companyName: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
                       />
                     </div>
                     <div>
@@ -1625,7 +1632,8 @@ export default function Consultation() {
                         placeholder="e.g. Rajesh Sharma, VP Engineering"
                         value={companyForm.contactName}
                         onChange={(e) => setCompanyForm({ ...companyForm, contactName: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
                       />
                     </div>
                   </div>
@@ -1641,7 +1649,8 @@ export default function Consultation() {
                         placeholder="e.g. rajesh@acmetech.com"
                         value={companyForm.workEmail}
                         onChange={(e) => setCompanyForm({ ...companyForm, workEmail: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
                       />
                     </div>
                     <div>
@@ -1654,7 +1663,8 @@ export default function Consultation() {
                         placeholder="e.g. +91 98765 43210"
                         value={companyForm.phone}
                         onChange={(e) => setCompanyForm({ ...companyForm, phone: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
                       />
                     </div>
                   </div>
@@ -1667,7 +1677,7 @@ export default function Consultation() {
                       <select
                         value={companyForm.roleId}
                         onChange={(e) => setCompanyForm({ ...companyForm, roleId: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
                         style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
                       >
                         {PARTNER_VACANCIES.map((r) => (
@@ -1689,7 +1699,7 @@ export default function Consultation() {
                       <select
                         value={companyForm.positionsNeeded}
                         onChange={(e) => setCompanyForm({ ...companyForm, positionsNeeded: e.target.value })}
-                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
+                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
                         style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
                       >
                         <option value="1 Engineer" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>1 Engineer</option>
@@ -1709,7 +1719,8 @@ export default function Consultation() {
                       placeholder="e.g. Must have 4+ years in automotive ISO 26262, on-site in Bangalore, immediate joining required..."
                       value={companyForm.requirements}
                       onChange={(e) => setCompanyForm({ ...companyForm, requirements: e.target.value })}
-                      className="w-full bg-dark-950 border border-white/20 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all resize-none"
+                      style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                      className="w-full bg-[#0b1329] border border-white/20 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all resize-none"
                     />
                   </div>
 
