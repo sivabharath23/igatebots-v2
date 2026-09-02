@@ -112,13 +112,13 @@ export const SERVICES = [
   },
   {
     id: 'consultation',
-    title: 'Engineering Consultation & Advisory',
-    subtitle: 'Strategic Technical Guidance',
-    description: 'Expert 1-on-1 technical advisory, hardware feasibility audits, PCB DFM reviews, and supply chain BOM optimization.',
-    longDesc: 'Our engineering consultation service bridges the gap between vision and technical execution. Whether validating a hardware concept, debugging prototype failures, optimizing high-speed board stackups, or preparing for CE/FCC certification, our veteran hardware architects provide direct, actionable guidance.',
+    title: 'Consultancy & Staffing',
+    subtitle: 'Strategic Technical Guidance & Talent Staffing',
+    description: 'Expert 1-on-1 technical advisory, hardware feasibility audits, PCB DFM reviews, and specialized partner company engineering staffing.',
+    longDesc: 'Our engineering consultancy and talent staffing service bridges the gap between vision and technical execution. Whether validating a hardware concept, debugging prototype failures, optimizing board stackups, or sourcing pre-vetted electronic engineering talent for your team, our veteran architects provide direct, actionable guidance.',
     image: IMAGES.consultation,
     icon: 'consultation',
-    features: ['Hardware Feasibility Audits', 'Architecture & MCU/SoC Selection', 'PCB DFM & Stackup Review', 'Signal & Power Integrity Advisory', 'BOM Cost & Sourcing Strategy', 'Pre-Compliance & Certification Prep'],
+    features: ['Hardware Feasibility Audits', 'Partner Company Vacancies & Staffing', 'PCB DFM & Stackup Review', 'Signal & Power Integrity Advisory', 'BOM Cost & Sourcing Strategy', 'Engineering Talent Screening'],
     slug: 'consultation',
   },
 ];
@@ -206,9 +206,12 @@ export const NAV_LINKS = [
   {
     label: 'Services',
     href: '/services',
-    dropdown: SERVICES.map(s => ({ label: s.title, href: `/services/${s.slug}` })),
+    dropdown: SERVICES.map(s => ({
+      label: s.title,
+      href: s.slug === 'consultation' ? '/consultancy' : `/services/${s.slug}`,
+    })),
   },
-  { label: 'Consultation', href: '/consultation' },
+  { label: 'Consultancy & Staffing', href: '/consultancy' },
   { label: 'Projects', href: '/projects' },
   { label: 'Contact', href: '/contact' },
 ];

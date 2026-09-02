@@ -14,9 +14,13 @@ export default function ServiceDetail() {
     window.scrollTo(0, 0);
   }, [slug]);
 
+  if (slug === 'consultation' || slug === 'consultancy') {
+    return <Navigate to="/consultancy" replace />;
+  }
+
   if (!service) return <Navigate to="/services" replace />;
 
-  const related = SERVICES.filter((s) => s.slug !== slug).slice(0, 3);
+  const related = SERVICES.filter((s) => s.slug !== slug && s.slug !== 'consultation').slice(0, 3);
 
   return (
     <>

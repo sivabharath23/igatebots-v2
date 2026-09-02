@@ -80,6 +80,187 @@ const ADVISORY_DOMAINS = [
   },
 ];
 
+// ── 12 ENGINEERING ROLES FOR PARTNER & CLIENT COMPANY VACANCIES ──────────────
+export const PARTNER_VACANCIES = [
+  {
+    id: 'electronic-hardware-design-engineer',
+    title: '🔧 Electronic Hardware Design Engineer',
+    rawTitle: 'Electronic Hardware Design Engineer',
+    icon: '🔧',
+    category: 'hardware',
+    categoryLabel: 'Hardware & Circuit',
+    experience: '3 - 7 Years',
+    location: 'Bangalore / Chennai / Hybrid',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '4 Openings',
+    description: 'Lead schematic capture, analog/digital circuit architecture, power tree budgeting, microcontroller/FPGA integration, and system board bring-up for Tier-1 electronic products.',
+    skills: ['Schematic Capture', 'Analog & Digital Design', 'Altium / OrCAD', 'Power Tree Budgeting', 'Board Bring-Up', 'BOM Optimization'],
+  },
+  {
+    id: 'pcb-design-engineer',
+    title: '📐 PCB Design Engineer',
+    rawTitle: 'PCB Design Engineer',
+    icon: '📐',
+    category: 'hardware',
+    categoryLabel: 'Hardware & Circuit',
+    experience: '2 - 6 Years',
+    location: 'Bangalore / Pune / On-site',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '5 Openings',
+    description: 'Design multi-layer high-density interconnect (HDI) printed circuit boards, high-speed differential routing, controlled impedance stackups, and rigorous DFM/DFA checks.',
+    skills: ['HDI Multi-Layer (6-16+ Layers)', 'Controlled Impedance', 'High-Speed DDR/PCIe', 'Altium Designer / Allegro', 'DFM / DFA Analysis', 'Gerber & ODB++'],
+  },
+  {
+    id: 'embedded-hardware-engineer',
+    title: '💻 Embedded Hardware Engineer',
+    rawTitle: 'Embedded Hardware Engineer',
+    icon: '💻',
+    category: 'embedded',
+    categoryLabel: 'Embedded Systems',
+    experience: '3 - 6 Years',
+    location: 'Bangalore / Hyderabad / Hybrid',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '3 Openings',
+    description: 'Architect embedded hardware solutions integrating ARM Cortex microcontrollers, wireless modules (BLE/Wi-Fi/LoRa), sensor suites, and high-reliability peripheral interfaces.',
+    skills: ['ARM Cortex-M / SoC', 'SPI / I2C / UART / USB', 'Board-Level Debugging', 'Oscilloscopes & Logic Analyzers', 'Hardware-Software Co-design', 'Low Power Design'],
+  },
+  {
+    id: 'component-engineering',
+    title: '🧩 Component / Component Engineering',
+    rawTitle: 'Component / Component Engineering',
+    icon: '🧩',
+    category: 'manufacturing',
+    categoryLabel: 'Manufacturing & DFM',
+    experience: '2 - 5 Years',
+    location: 'Bangalore / Chennai / Hybrid',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '2 Openings',
+    description: 'Manage electronic component qualification, lifecycle management, alternate sourcing strategies, second-source vetting, and end-of-life (EOL) obsolescence mitigation.',
+    skills: ['Component Qualification', 'Lifecycle & EOL Management', 'SiliconExpert / IHS', 'Alternate Cross-referencing', 'Counterfeit Mitigation', 'Supply Chain Liaison'],
+  },
+  {
+    id: 'hardware-validation-testing-engineer',
+    title: '🔬 Hardware Validation & Testing Engineer',
+    rawTitle: 'Hardware Validation & Testing Engineer',
+    icon: '🔬',
+    category: 'testing-qa',
+    categoryLabel: 'Validation & Testing',
+    experience: '2 - 5 Years',
+    location: 'Bangalore / On-site Lab',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '3 Openings',
+    description: 'Develop and execute Design Verification Testing (DVT/EVT) protocols, signal integrity validation, power rail ripple analysis, and pre-compliance electromagnetic compatibility testing.',
+    skills: ['DVT & EVT Test Protocols', 'High-Bandwidth Scopes', 'Signal & Power Integrity', 'Automated Python Test Scripts', 'Thermal Profiling', 'Pre-Compliance EMC'],
+  },
+  {
+    id: 'power-electronics-engineer',
+    title: '⚡ Power Electronics Engineer',
+    rawTitle: 'Power Electronics Engineer',
+    icon: '⚡',
+    category: 'power-ev',
+    categoryLabel: 'Power & Automotive / EV',
+    experience: '4 - 8 Years',
+    location: 'Bangalore / Coimbatore / On-site',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '3 Openings',
+    description: 'Design high-efficiency SMPS converters, DC-DC buck/boost regulators, GaN/SiC power switching stages, magnetics design, and active thermal management.',
+    skills: ['SMPS / DC-DC Converters', 'GaN & SiC Switching', 'Magnetics Design', 'Thermal Dissipation', 'LTspice / PLECS', 'High Voltage Safety'],
+  },
+  {
+    id: 'automotive-electronics-engineer',
+    title: '🚗 Automotive Electronics Engineer',
+    rawTitle: 'Automotive Electronics Engineer',
+    icon: '🚗',
+    category: 'power-ev',
+    categoryLabel: 'Power & Automotive / EV',
+    experience: '3 - 7 Years',
+    location: 'Pune / Bangalore / Chennai',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '4 Openings',
+    description: 'Design automotive electronic control units (ECUs) compliant with ISO 26262 functional safety, ISO 7637 transient protection, and CAN-FD/LIN communication buses.',
+    skills: ['Automotive ECUs', 'ISO 26262 (ASIL B/D)', 'CAN / LIN / Automotive Ethernet', 'ISO 7637 Transient Protection', 'AEC-Q Qualified Components', 'Vector CANoe'],
+  },
+  {
+    id: 'ev-electronics-engineer',
+    title: '🔋 EV Electronics Engineer',
+    rawTitle: 'EV Electronics Engineer',
+    icon: '🔋',
+    category: 'power-ev',
+    categoryLabel: 'Power & Automotive / EV',
+    experience: '3 - 8 Years',
+    location: 'Bangalore / Pune / Hybrid',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '3 Openings',
+    description: 'Develop Battery Management Systems (BMS), high-voltage isolation, cell balancing circuitry, onboard chargers (OBC), and motor drive interfaces for electric vehicle applications.',
+    skills: ['BMS Architecture', 'Cell Monitoring & Balancing ICs', 'High-Voltage Isolation', 'On-Board Chargers (OBC)', 'Motor Controller Interfaces', 'Thermal Runway Safety'],
+  },
+  {
+    id: 'embedded-systems-engineer',
+    title: '🖥️ Embedded Systems Engineer',
+    rawTitle: 'Embedded Systems Engineer',
+    icon: '🖥️',
+    category: 'embedded',
+    categoryLabel: 'Embedded Systems',
+    experience: '2 - 6 Years',
+    location: 'Bangalore / Trivandrum / Hybrid',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '5 Openings',
+    description: 'Develop robust bare-metal and RTOS firmware, board support packages (BSP), hardware abstraction layers (HAL), device drivers, and connectivity protocol stacks.',
+    skills: ['FreeRTOS / Bare-Metal C/C++', 'STM32 / ESP32 / NXP', 'Device Driver Development', 'HAL & BSP Development', 'BLE / Wi-Fi / Zigbee', 'JTAG / SWD Debugging'],
+  },
+  {
+    id: 'electronics-manufacturing-production-engineer',
+    title: '🏭 Electronics Manufacturing / Production Engineer',
+    rawTitle: 'Electronics Manufacturing / Production Engineer',
+    icon: '🏭',
+    category: 'manufacturing',
+    categoryLabel: 'Manufacturing & DFM',
+    experience: '3 - 7 Years',
+    location: 'Bangalore / Sriperumbudur / On-site',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '2 Openings',
+    description: 'Supervise automated SMT lines, reflow oven profiling, wave soldering setups, stencil thickness design, optical inspection (AOI), and EMS contract manufacturer quality.',
+    skills: ['SMT Line Optimization', 'Reflow Thermal Profiling', 'AOI & X-Ray Inspection', 'IPC-A-610 Workmanship', 'EMS Liaison & Audits', 'Yield Root-Cause Analysis'],
+  },
+  {
+    id: 'dfm-dft-engineer',
+    title: '📋 DFM / DFT Engineer',
+    rawTitle: 'DFM / DFT Engineer',
+    icon: '📋',
+    category: 'manufacturing',
+    categoryLabel: 'Manufacturing & DFM',
+    experience: '3 - 6 Years',
+    location: 'Bangalore / Chennai / Hybrid',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '2 Openings',
+    description: 'Ensure circuit and PCB designs adhere strictly to Design for Manufacturing (DFM) and Design for Testability (DFT), optimizing ICT probe points and panelization yields.',
+    skills: ['Valor / Genesis DFM Tools', 'In-Circuit Test (ICT) Testpoints', 'Flying Probe & Bed-of-Nails', 'Panelization & Breakaways', 'FMEA Analysis', 'Solder Mask & Pad Annular Ring Checks'],
+  },
+  {
+    id: 'reliability-testing-engineer',
+    title: '🧪 Reliability & Testing Engineer',
+    rawTitle: 'Reliability & Testing Engineer',
+    icon: '🧪',
+    category: 'testing-qa',
+    categoryLabel: 'Validation & Testing',
+    experience: '3 - 7 Years',
+    location: 'Bangalore / Pune / On-site Lab',
+    type: 'Full-time • Partner Company Vacancy',
+    openings: '3 Openings',
+    description: 'Perform accelerated life testing (HALT/HASS), thermal shock cycling, mechanical vibration & drop testing, MTBF calculations, and physical root-cause failure analysis.',
+    skills: ['HALT / HASS Screening', 'Thermal Shock & Cycling', 'Vibration & Drop Testing', 'MIL-STD-810 & IEC 60068', 'MTBF & FIT Rate Calculation', 'SEM / Cross-Section Failure Analysis'],
+  },
+];
+
+const VACANCY_CATEGORIES = [
+  { id: 'all', label: 'All Openings', count: PARTNER_VACANCIES.length },
+  { id: 'hardware', label: 'Hardware & Circuit', count: 2 },
+  { id: 'embedded', label: 'Embedded Systems', count: 2 },
+  { id: 'power-ev', label: 'Power & Automotive / EV', count: 3 },
+  { id: 'testing-qa', label: 'Validation & Testing', count: 2 },
+  { id: 'manufacturing', label: 'Manufacturing & DFM', count: 3 },
+];
+
 const PACKAGES = [
   {
     id: 'diagnostic',
@@ -134,6 +315,14 @@ const PACKAGES = [
 
 const FAQS = [
   {
+    q: 'Why does iGatebots hire for other partner companies and vacancies?',
+    a: 'Beyond technical advisory, iGatebots operates a specialized engineering staffing and talent placement consultancy. Because our leadership consists of senior hardware and embedded architects, we have the technical depth to evaluate, screen, and match top-tier electronic talent for partner companies, Tier-1 electronics OEMs, and automotive innovators who need vetted engineers without hiring delays.',
+  },
+  {
+    q: 'Are the 12 engineering vacancies full-time direct roles or contract placements?',
+    a: 'We offer both direct full-time placements with our partner companies as well as specialized contract-to-hire arrangements, depending on the client’s project milestones and organization structure. Every candidate is technically vetted by our senior engineering team before referral.',
+  },
+  {
     q: 'Do you execute a Non-Disclosure Agreement (NDA) before we discuss details?',
     a: 'Absolutely. We treat all client intellectual property with the highest confidentiality. We provide our standard mutual NDA or can review and sign your company’s standard NDA before any proprietary files or specifications are shared.',
   },
@@ -146,18 +335,48 @@ const FAQS = [
     a: 'Our engineering team is fluent across all industry-standard EDA packages including Altium Designer, KiCad, Autodesk Eagle, Cadence OrCAD/Allegro, and Mentor Graphics PADS.',
   },
   {
-    q: 'How quickly will we receive the written audit report after our session?',
-    a: 'For our Deep-Dive Architecture & DFM Audit, you will receive our structured technical report complete with annotated schematics, PCB stackup modifications, and component recommendations within 48 to 72 business hours.',
-  },
-  {
-    q: 'Can iGatebots also execute the full design or redesign if fixes are required?',
-    a: 'Yes. If our consultation reveals changes you prefer not to implement in-house, our full engineering team can seamlessly handle the schematic modification, PCB re-routing, prototyping, and turnkey fabrication.',
+    q: 'Can companies submit custom staffing requirements for other niche hardware roles?',
+    a: 'Yes. If your company requires hardware engineers with specific domain experience (e.g., medical device electronics, aerospace avionics, radar/RF design), you can use our Company Staffing form or call our technical desk directly to discuss dedicated talent sourcing.',
   },
 ];
 
 export default function Consultation() {
   const [selectedDomain, setSelectedDomain] = useState(ADVISORY_DOMAINS[0].id);
   const [activeFaq, setActiveFaq] = useState(null);
+
+  // Vacancies Filter & Search State
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Interactive Application / Staffing Modal State
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState('candidate'); // 'candidate' | 'company'
+  const [activeVacancyForModal, setActiveVacancyForModal] = useState(PARTNER_VACANCIES[0]);
+
+  const [applicantForm, setApplicantForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    roleId: PARTNER_VACANCIES[0].id,
+    experience: '3-5 Years',
+    location: '',
+    noticePeriod: 'Immediate to 15 Days',
+    portfolioUrl: '',
+    notes: '',
+  });
+
+  const [companyForm, setCompanyForm] = useState({
+    companyName: '',
+    contactName: '',
+    workEmail: '',
+    phone: '',
+    roleId: PARTNER_VACANCIES[0].id,
+    positionsNeeded: '1-2 Engineers',
+    timeline: 'Immediate (Within 2-4 weeks)',
+    requirements: '',
+  });
+
+  const [modalSubmitStatus, setModalSubmitStatus] = useState('idle'); // 'idle' | 'submitting' | 'success'
 
   // Booking Form State
   const [bookingTier, setBookingTier] = useState('audit');
@@ -175,9 +394,45 @@ export default function Consultation() {
   const [submitStatus, setSubmitStatus] = useState('idle'); // 'idle' | 'submitting' | 'success'
 
   useEffect(() => {
-    document.title = 'Engineering Consultation & Technical Advisory | iGatebots';
+    document.title = 'Engineering Consultancy & Staffing | iGatebots';
     window.scrollTo(0, 0);
   }, []);
+
+  // Filtered vacancies list
+  const filteredVacancies = PARTNER_VACANCIES.filter((v) => {
+    const matchesCategory = selectedCategory === 'all' || v.category === selectedCategory;
+    const matchesQuery =
+      v.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      v.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      v.skills.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      v.location.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesQuery;
+  });
+
+  const handleOpenApplyModal = (vacancy, mode = 'candidate') => {
+    setActiveVacancyForModal(vacancy);
+    setApplicantForm((prev) => ({ ...prev, roleId: vacancy.id }));
+    setCompanyForm((prev) => ({ ...prev, roleId: vacancy.id }));
+    setModalMode(mode);
+    setModalSubmitStatus('idle');
+    setModalOpen(true);
+  };
+
+  const handleApplicantSubmit = (e) => {
+    e.preventDefault();
+    setModalSubmitStatus('submitting');
+    setTimeout(() => {
+      setModalSubmitStatus('success');
+    }, 1200);
+  };
+
+  const handleCompanySubmit = (e) => {
+    e.preventDefault();
+    setModalSubmitStatus('submitting');
+    setTimeout(() => {
+      setModalSubmitStatus('success');
+    }, 1200);
+  };
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -202,7 +457,7 @@ export default function Consultation() {
       {/* ── HERO SECTION ────────────────────────────────────────────────────────── */}
       <section className="relative pt-36 pb-24 overflow-hidden">
         <PCBBackground />
-        
+
         {/* Glow backdrop */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -214,34 +469,50 @@ export default function Consultation() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-primary-500/10 border border-primary-500/30 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-6 shadow-glow-primary">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              1-on-1 Technical Advisory & Hardware Strategy
+            {/* Top Announcement Badge */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-primary-500/10 border border-primary-500/30 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase shadow-glow-primary">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                1-on-1 Technical Advisory & Hardware Strategy
+              </div>
+              <a
+                href="#partner-vacancies"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-accent-500/10 hover:bg-accent-500/20 border border-accent-400/30 rounded-full text-accent-300 text-xs font-body tracking-wider transition-all"
+              >
+                <span className="w-2 h-2 rounded-full bg-accent-400 animate-ping" />
+                ⚡ Hiring for Partner Companies: 12 Open Vacancies &darr;
+              </a>
             </div>
 
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 max-w-4xl mx-auto leading-[1.1]">
-              Expert <span className="gradient-text">Engineering Consultation</span> for Hardware Innovation
+              Expert <span className="gradient-text">Engineering Consultancy</span> & Staffing
             </h1>
 
             <p className="text-white/55 text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed font-body">
-              Eliminate costly PCB re-spins, validate hardware architectures, optimize bill-of-materials, and resolve critical bring-up roadblocks with direct access to veteran electronics engineers.
+              Eliminate costly PCB re-spins, validate hardware architectures, optimize bill-of-materials, and connect with top-tier electronic talent through our engineering consultancy and partner company vacancy staffing network.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
               <a
-                href="#book-consultation"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:shadow-xl hover:shadow-primary-500/30 hover:shadow-glow-primary hover:-translate-y-0.5"
+                href="#partner-vacancies"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent-500 to-primary-500 hover:from-accent-400 hover:to-primary-400 text-white font-body font-semibold rounded-full text-sm tracking-wide transition-all duration-200 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-0.5"
               >
-                Schedule a Consultation
+                View 12 Partner Vacancies
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
                 </svg>
               </a>
               <a
+                href="#book-consultation"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-500/20 hover:bg-primary-500/30 border border-primary-500/40 text-primary-300 hover:text-white font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:-translate-y-0.5"
+              >
+                Schedule Advisory Call
+              </a>
+              <a
                 href="#advisory-domains"
                 className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white/70 hover:text-white hover:border-primary-400/40 hover:bg-white/5 font-body font-medium rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5"
               >
-                Explore Advisory Domains
+                Advisory Domains
               </a>
             </div>
 
@@ -250,7 +521,7 @@ export default function Consultation() {
               {[
                 { label: 'Hardware Audits Delivered', value: '150+' },
                 { label: 'First-Pass PCB Success', value: '99%' },
-                { label: 'Average BOM Savings', value: '25% - 40%' },
+                { label: 'Partner Company Vacancies', value: '12 Active' },
                 { label: 'Confidentiality Guarantee', value: '100% NDA' },
               ].map((stat, i) => (
                 <div key={i} className="p-3 bg-dark-800/40 border border-white/5 rounded-xl">
@@ -258,6 +529,209 @@ export default function Consultation() {
                   <p className="text-white/40 text-xs font-body mt-1">{stat.label}</p>
                 </div>
               ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── 12 OPEN ROLES: HIRING FOR PARTNER & CLIENT COMPANIES ────────────────── */}
+      <section id="partner-vacancies" className="py-24 bg-dark-900/90 border-t border-white/5 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-accent-500/10 border border-accent-400/30 rounded-full text-accent-400 text-xs font-body tracking-widest uppercase mb-4 shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-400 animate-pulse" />
+              Talent Acquisition & Staffing
+            </div>
+            <h2 className="font-display text-4xl lg:text-5xl font-bold text-white mb-4">
+              Hiring for <span className="gradient-text">Other Company Vacancies</span>
+            </h2>
+            <p className="text-white/50 max-w-3xl mx-auto text-base sm:text-lg font-body leading-relaxed">
+              As an electronics engineering consultancy, iGatebots actively sources, technically vets, and places qualified engineering talent for our esteemed partner companies, Tier-1 OEMs, and fast-growing hardware innovators. Explore active openings below or submit your application directly.
+            </p>
+          </AnimatedSection>
+
+          {/* Search & Filter Controls */}
+          <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4">
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+              {VACANCY_CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-4 py-2 rounded-full text-xs font-body font-medium transition-all ${
+                    selectedCategory === cat.id
+                      ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/25 border border-primary-400'
+                      : 'bg-dark-800/80 border border-white/10 text-white/60 hover:text-white hover:border-white/20'
+                  }`}
+                >
+                  {cat.label}
+                  <span
+                    className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] ${
+                      selectedCategory === cat.id ? 'bg-white/20 text-white' : 'bg-white/10 text-white/40'
+                    }`}
+                  >
+                    {cat.id === 'all'
+                      ? PARTNER_VACANCIES.length
+                      : PARTNER_VACANCIES.filter((v) => v.category === cat.id).length}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Keyword Search */}
+            <div className="relative w-full md:w-72">
+              <input
+                type="text"
+                placeholder="Search skills, tools, roles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-dark-800/90 border border-white/10 rounded-full pl-10 pr-4 py-2 text-xs text-white placeholder-white/30 focus:outline-none focus:border-primary-400 transition-all"
+              />
+              <svg
+                className="w-4 h-4 text-white/40 absolute left-3.5 top-1/2 -translate-y-1/2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs"
+                >
+                  &times;
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Results Summary */}
+          <div className="flex items-center justify-between text-xs text-white/40 mb-6 font-mono">
+            <span>
+              Displaying {filteredVacancies.length} of {PARTNER_VACANCIES.length} open roles for partner companies
+            </span>
+            <span className="flex items-center gap-1.5 text-emerald-400">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              Actively Screening Candidates
+            </span>
+          </div>
+
+          {/* 12 Vacancies Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {filteredVacancies.map((vacancy) => (
+              <AnimatedSection key={vacancy.id}>
+                <div className="bg-dark-800/70 border border-white/10 rounded-2xl p-6 h-full flex flex-col justify-between hover:border-primary-500/40 hover:bg-dark-800/90 hover:shadow-xl hover:shadow-primary-500/5 transition-all duration-300 group">
+                  <div>
+                    {/* Top Row: Tag & Openings */}
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full text-[11px] font-mono">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Partner Vacancy
+                      </span>
+                      <span className="text-[11px] font-mono text-primary-400/90 px-2 py-0.5 bg-primary-500/10 rounded-md">
+                        {vacancy.openings}
+                      </span>
+                    </div>
+
+                    {/* Role Title with Exact User Emoji */}
+                    <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-primary-300 transition-colors flex items-start gap-2">
+                      <span>{vacancy.title}</span>
+                    </h3>
+
+                    {/* Meta info tags */}
+                    <div className="flex flex-wrap items-center gap-2 mb-4 text-xs font-body text-white/50">
+                      <span className="inline-flex items-center gap-1 bg-white/5 px-2.5 py-1 rounded-md border border-white/5">
+                        <svg className="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {vacancy.experience}
+                      </span>
+                      <span className="inline-flex items-center gap-1 bg-white/5 px-2.5 py-1 rounded-md border border-white/5">
+                        <svg className="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {vacancy.location}
+                      </span>
+                    </div>
+
+                    <p className="text-white/55 text-xs sm:text-sm leading-relaxed mb-5 font-body">
+                      {vacancy.description}
+                    </p>
+
+                    {/* Required Skills Chips */}
+                    <div className="space-y-2 mb-6">
+                      <p className="text-[11px] font-mono uppercase tracking-wider text-white/30">Target Competencies:</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {vacancy.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="text-[11px] font-body bg-dark-900/80 text-white/70 px-2 py-0.5 rounded border border-white/5"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="pt-4 border-t border-white/5 flex items-center gap-2">
+                    <button
+                      onClick={() => handleOpenApplyModal(vacancy, 'candidate')}
+                      className="flex-1 py-2.5 px-4 bg-primary-500 hover:bg-primary-400 text-white text-xs font-body font-medium rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-primary-500/20"
+                    >
+                      Apply for Role
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => handleOpenApplyModal(vacancy, 'company')}
+                      className="py-2.5 px-3 border border-white/15 hover:border-primary-400/40 hover:bg-white/5 text-white/70 hover:text-white text-xs font-body rounded-xl transition-all"
+                      title="Hire engineers for this role at your company"
+                    >
+                      Hire Talent
+                    </button>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* Employer Staffing Banner */}
+          <AnimatedSection>
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-dark-800 via-dark-800 to-primary-950/40 border border-primary-500/30 p-8 sm:p-10 shadow-2xl">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div className="max-w-2xl text-center lg:text-left">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase text-primary-400 tracking-wider mb-2">
+                    <span className="w-2 h-2 rounded-full bg-primary-400" />
+                    For Employers & Hardware Teams
+                  </span>
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-3">
+                    Looking to Hire Specialized Electronics Engineers for Your Company?
+                  </h3>
+                  <p className="text-white/55 text-sm sm:text-base leading-relaxed font-body">
+                    Avoid mis-hires and shorten time-to-hire. iGatebots conducts deep technical evaluations led by experienced hardware and embedded architects to supply pre-vetted engineers directly to your team.
+                  </p>
+                </div>
+                <div className="shrink-0 flex flex-col sm:flex-row gap-3">
+                  <button
+                    onClick={() => handleOpenApplyModal(PARTNER_VACANCIES[0], 'company')}
+                    className="px-8 py-4 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm transition-all shadow-lg shadow-primary-500/30 text-center"
+                  >
+                    Request Talent Consultation
+                  </button>
+                  <a
+                    href={`mailto:${COMPANY.email}?subject=Partner%20Company%20Engineering%20Staffing%20Inquiry`}
+                    className="px-6 py-4 border border-white/20 hover:border-white/40 text-white/80 hover:text-white font-body text-sm rounded-full transition-all text-center"
+                  >
+                    Email Staffing Desk
+                  </a>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
         </div>
@@ -588,6 +1062,17 @@ export default function Consultation() {
                         {domain.title}
                       </button>
                     ))}
+                    <button
+                      type="button"
+                      onClick={() => setFormData((p) => ({ ...p, domain: 'staffing-vacancies' }))}
+                      className={`text-left p-3.5 rounded-xl border text-xs font-body transition-all ${
+                        formData.domain === 'staffing-vacancies'
+                          ? 'bg-accent-500/20 border-accent-400 text-white font-medium'
+                          : 'bg-white/5 border-white/8 text-white/60 hover:border-white/20'
+                      }`}
+                    >
+                      ⚡ Partner Vacancy / Talent Staffing
+                    </button>
                   </div>
                 </div>
 
@@ -643,7 +1128,7 @@ export default function Consultation() {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-white/40 text-xs font-body mb-1 block">Project Stage</label>
+                      <label className="text-white/40 text-xs font-body mb-1 block">Project Stage / Inquiry Type</label>
                       <select
                         name="projectStage"
                         value={formData.projectStage}
@@ -655,6 +1140,7 @@ export default function Consultation() {
                         <option value="PCB layout review ready">PCB layout review ready</option>
                         <option value="Prototype bring-up failure / debugging">Prototype bring-up failure / debugging</option>
                         <option value="Preparing for high-volume production">Preparing for high-volume production</option>
+                        <option value="Hiring / Staffing Requisition">Hiring / Staffing Requisition</option>
                       </select>
                     </div>
 
@@ -680,7 +1166,7 @@ export default function Consultation() {
                       rows={4}
                       value={formData.notes}
                       onChange={handleInputChange}
-                      placeholder="Briefly describe your hardware challenge, target MCU/ICs, or key questions for the session..."
+                      placeholder="Briefly describe your hardware challenge, target MCU/ICs, or specific talent role required..."
                       className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary-400 focus:bg-primary-500/5 transition-all resize-none"
                     />
                   </div>
@@ -737,10 +1223,10 @@ export default function Consultation() {
               Common Questions
             </div>
             <h2 className="font-display text-4xl font-bold text-white mb-4">
-              Consultation <span className="gradient-text">FAQs</span>
+              Consultation & Hiring <span className="gradient-text">FAQs</span>
             </h2>
             <p className="text-white/45 max-w-xl mx-auto text-base font-body">
-              Everything you need to know about preparing for and executing a technical consultation.
+              Everything you need to know about preparing for technical advisory and partner company vacancies.
             </p>
           </AnimatedSection>
 
@@ -807,10 +1293,10 @@ export default function Consultation() {
         <div className="relative max-w-4xl mx-auto px-4 text-center">
           <AnimatedSection>
             <h2 className="font-display text-4xl font-bold text-white mb-4">
-              Need Immediate Hardware Support?
+              Need Immediate Hardware Support or Staffing Consultation?
             </h2>
             <p className="text-white/50 max-w-xl mx-auto mb-8 font-body">
-              Facing an urgent prototype failure or tight silicon deadline? Call our engineering desk directly or email our priority queue.
+              Facing an urgent prototype failure or need to hire vetted electronics engineers immediately? Call our engineering desk directly or email our priority queue.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <a
@@ -835,6 +1321,411 @@ export default function Consultation() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* ── INTERACTIVE DUAL-MODE MODAL: CANDIDATE APPLY / COMPANY HIRE ─────────── */}
+      <AnimatePresence>
+        {modalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setModalOpen(false)}
+              className="fixed inset-0 bg-dark-950/80 backdrop-blur-md"
+            />
+
+            {/* Modal Dialog */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl bg-dark-900 border border-white/15 rounded-3xl p-6 sm:p-8 shadow-2xl z-10 my-8 overflow-hidden"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setModalOpen(false)}
+                className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white flex items-center justify-center transition-all"
+              >
+                &times;
+              </button>
+
+              {/* Modal Header */}
+              <div className="mb-6 pb-5 border-b border-white/10">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-500/20 border border-primary-500/40 rounded-full text-primary-300 text-xs font-mono font-medium">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Partner Company Vacancy Portal
+                  </span>
+                  <span className="text-xs font-mono text-emerald-400 px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-md">
+                    {activeVacancyForModal?.openings || 'Active Vacancy'}
+                  </span>
+                </div>
+                <h3 className="font-display text-2xl font-bold text-white flex items-center gap-2 mt-1">
+                  <span>{activeVacancyForModal?.title}</span>
+                </h3>
+                <div className="flex flex-wrap items-center gap-3 text-white/70 text-xs font-body mt-2">
+                  <span className="flex items-center gap-1 text-white/80 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
+                    📍 {activeVacancyForModal?.location}
+                  </span>
+                  <span className="flex items-center gap-1 text-white/80 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
+                    ⏱️ {activeVacancyForModal?.experience}
+                  </span>
+                  <span className="text-emerald-400 font-medium">
+                    ✓ Direct Screening by iGatebots
+                  </span>
+                </div>
+              </div>
+
+              {/* Mode Switcher Tabs */}
+              <div className="flex rounded-xl bg-dark-800 p-1.5 mb-6 border border-white/15 shadow-inner">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setModalMode('candidate');
+                    setModalSubmitStatus('idle');
+                  }}
+                  className={`flex-1 py-2.5 rounded-lg text-xs sm:text-sm font-body font-semibold transition-all ${
+                    modalMode === 'candidate'
+                      ? 'bg-primary-500 text-white shadow-md shadow-primary-500/30'
+                      : 'text-white/70 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  👨‍💻 Candidate Application
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setModalMode('company');
+                    setModalSubmitStatus('idle');
+                  }}
+                  className={`flex-1 py-2.5 rounded-lg text-xs sm:text-sm font-body font-semibold transition-all ${
+                    modalMode === 'company'
+                      ? 'bg-primary-500 text-white shadow-md shadow-primary-500/30'
+                      : 'text-white/70 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  🏢 Company Talent Request
+                </button>
+              </div>
+
+              {/* Modal Body */}
+              {modalSubmitStatus === 'success' ? (
+                <div className="text-center py-10">
+                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto mb-4 text-emerald-400">
+                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="font-display text-2xl font-bold text-white mb-2">
+                    {modalMode === 'candidate' ? 'Application Submitted!' : 'Staffing Request Received!'}
+                  </h4>
+                  <p className="text-white/80 text-sm max-w-md mx-auto mb-6 font-body leading-relaxed">
+                    {modalMode === 'candidate'
+                      ? 'Your profile has been forwarded to our technical recruitment desk. A senior engineering lead will review your background and reach out regarding partner company interviews.'
+                      : 'Thank you for submitting your staffing requisition. Our talent acquisition team will prepare a targeted candidate shortlist and contact you within 24 hours.'}
+                  </p>
+                  <button
+                    onClick={() => setModalOpen(false)}
+                    className="px-6 py-2.5 bg-primary-500 hover:bg-primary-400 text-white text-xs font-body font-medium rounded-full transition-all"
+                  >
+                    Close Window
+                  </button>
+                </div>
+              ) : modalMode === 'candidate' ? (
+                /* Candidate Form */
+                <form onSubmit={handleApplicantSubmit} className="space-y-4">
+                  {/* Role Selection */}
+                  <div>
+                    <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      Target Engineering Vacancy <span className="text-primary-400">*</span>
+                    </label>
+                    <select
+                      value={applicantForm.roleId}
+                      onChange={(e) => {
+                        const target = PARTNER_VACANCIES.find((v) => v.id === e.target.value);
+                        if (target) {
+                          setActiveVacancyForModal(target);
+                          setApplicantForm((p) => ({ ...p, roleId: target.id }));
+                        }
+                      }}
+                      className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-3 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
+                      style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                    >
+                      {PARTNER_VACANCIES.map((r) => (
+                        <option
+                          key={r.id}
+                          value={r.id}
+                          style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                          className="bg-dark-950 text-white py-2"
+                        >
+                          {r.title}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Name & Email */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Full Name <span className="text-primary-400">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Arun Kumar"
+                        value={applicantForm.name}
+                        onChange={(e) => setApplicantForm({ ...applicantForm, name: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Email Address <span className="text-primary-400">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="e.g. arun.kumar@gmail.com"
+                        value={applicantForm.email}
+                        onChange={(e) => setApplicantForm({ ...applicantForm, email: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Phone & Experience */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Phone / WhatsApp Number <span className="text-primary-400">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="e.g. +91 98765 43210"
+                        value={applicantForm.phone}
+                        onChange={(e) => setApplicantForm({ ...applicantForm, phone: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Experience Level <span className="text-primary-400">*</span>
+                      </label>
+                      <select
+                        value={applicantForm.experience}
+                        onChange={(e) => setApplicantForm({ ...applicantForm, experience: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                      >
+                        <option value="1-2 Years" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>1 - 2 Years Experience</option>
+                        <option value="3-5 Years" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>3 - 5 Years Experience</option>
+                        <option value="5-8 Years" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>5 - 8 Years Experience</option>
+                        <option value="8+ Years (Lead / Principal)" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>8+ Years (Lead / Principal)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Location & Notice Period */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Current City / Location <span className="text-primary-400">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Bangalore, Pune, Chennai"
+                        required
+                        value={applicantForm.location}
+                        onChange={(e) => setApplicantForm({ ...applicantForm, location: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Notice Period <span className="text-primary-400">*</span>
+                      </label>
+                      <select
+                        value={applicantForm.noticePeriod}
+                        onChange={(e) => setApplicantForm({ ...applicantForm, noticePeriod: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                      >
+                        <option value="Immediate / Serving Notice" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>Immediate / Serving Notice</option>
+                        <option value="15 Days" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>15 Days</option>
+                        <option value="30 Days" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>30 Days</option>
+                        <option value="60 - 90 Days" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>60 - 90 Days</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Resume / Profile link */}
+                  <div>
+                    <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      LinkedIn Profile URL or Google Drive Resume Link <span className="text-primary-400">*</span>
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="https://linkedin.com/in/yourprofile or https://drive.google.com/..."
+                      required
+                      value={applicantForm.portfolioUrl}
+                      onChange={(e) => setApplicantForm({ ...applicantForm, portfolioUrl: e.target.value })}
+                      className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                    />
+                  </div>
+
+                  {/* Technical Notes */}
+                  <div>
+                    <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      Core Tools & Key Competencies (Optional)
+                    </label>
+                    <textarea
+                      rows={2}
+                      placeholder="e.g. Altium Designer (6-layer boards), STM32CubeIDE, KiCad, CAN bus debugging, DFM checks..."
+                      value={applicantForm.notes}
+                      onChange={(e) => setApplicantForm({ ...applicantForm, notes: e.target.value })}
+                      className="w-full bg-dark-950 border border-white/20 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={modalSubmitStatus === 'submitting'}
+                    className="w-full py-3.5 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary-500/25 disabled:opacity-60 mt-2"
+                  >
+                    {modalSubmitStatus === 'submitting' ? 'Submitting Application...' : 'Submit Job Application'}
+                  </button>
+                </form>
+              ) : (
+                /* Company Form */
+                <form onSubmit={handleCompanySubmit} className="space-y-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Company / Organization Name <span className="text-primary-400">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Acme Technologies Ltd"
+                        value={companyForm.companyName}
+                        onChange={(e) => setCompanyForm({ ...companyForm, companyName: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Contact Person & Designation <span className="text-primary-400">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Rajesh Sharma, VP Engineering"
+                        value={companyForm.contactName}
+                        onChange={(e) => setCompanyForm({ ...companyForm, contactName: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Official Work Email <span className="text-primary-400">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="e.g. rajesh@acmetech.com"
+                        value={companyForm.workEmail}
+                        onChange={(e) => setCompanyForm({ ...companyForm, workEmail: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Phone / WhatsApp Number <span className="text-primary-400">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="e.g. +91 98765 43210"
+                        value={companyForm.phone}
+                        onChange={(e) => setCompanyForm({ ...companyForm, phone: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Target Engineering Role <span className="text-primary-400">*</span>
+                      </label>
+                      <select
+                        value={companyForm.roleId}
+                        onChange={(e) => setCompanyForm({ ...companyForm, roleId: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                      >
+                        {PARTNER_VACANCIES.map((r) => (
+                          <option
+                            key={r.id}
+                            value={r.id}
+                            style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                            className="bg-dark-950 text-white py-2"
+                          >
+                            {r.title}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                        Positions Needed <span className="text-primary-400">*</span>
+                      </label>
+                      <select
+                        value={companyForm.positionsNeeded}
+                        onChange={(e) => setCompanyForm({ ...companyForm, positionsNeeded: e.target.value })}
+                        className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
+                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                      >
+                        <option value="1 Engineer" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>1 Engineer</option>
+                        <option value="2-3 Engineers" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>2 - 3 Engineers</option>
+                        <option value="4-5 Engineers" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>4 - 5 Engineers</option>
+                        <option value="Dedicated Pod / Team (5+)" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>Dedicated Pod / Team (5+)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      Specific Requirements & Work Model
+                    </label>
+                    <textarea
+                      rows={3}
+                      placeholder="e.g. Must have 4+ years in automotive ISO 26262, on-site in Bangalore, immediate joining required..."
+                      value={companyForm.requirements}
+                      onChange={(e) => setCompanyForm({ ...companyForm, requirements: e.target.value })}
+                      className="w-full bg-dark-950 border border-white/20 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={modalSubmitStatus === 'submitting'}
+                    className="w-full py-3.5 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary-500/25 disabled:opacity-60 mt-2"
+                  >
+                    {modalSubmitStatus === 'submitting' ? 'Submitting Requisition...' : 'Request Candidate Shortlist'}
+                  </button>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

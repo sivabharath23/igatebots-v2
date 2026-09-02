@@ -69,7 +69,7 @@ export default function Footer() {
               {SERVICES.map((s) => (
                 <li key={s.id}>
                   <Link
-                    to={`/services/${s.slug}`}
+                    to={s.slug === 'consultation' ? '/consultancy' : `/services/${s.slug}`}
                     className="flex items-center gap-2.5 text-white/40 text-sm font-body hover:text-primary-400 transition-colors duration-200 group"
                   >
                     <div className="w-5 h-5 rounded flex items-center justify-center text-white/20 group-hover:text-primary-400/60 transition-colors shrink-0">
