@@ -71,10 +71,10 @@ export default function Services() {
                     ))}
                   </div>
                   <Link
-                    to={`/services/${service.slug}`}
+                    to={service.slug === 'consultation' ? '/consultancy' : `/services/${service.slug}`}
                     className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25"
                   >
-                    View Details
+                    {service.slug === 'consultation' ? 'View Consultancy & Staffing' : 'View Details'}
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -94,7 +94,7 @@ export default function Services() {
             <h2 className="font-display text-4xl font-bold text-white mb-4">Need a Custom Solution?</h2>
             <p className="text-white/45 mb-8 font-body">Our team is ready to discuss your specific requirements and create a tailored engineering plan.</p>
             <Link
-              to="/consultation"
+              to="/consultancy"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25"
             >
               Request a Consultation

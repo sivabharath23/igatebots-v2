@@ -319,7 +319,7 @@ function ServicesSection() {
 function ServiceCard({ service }) {
   return (
     <Link
-      to={`/services/${service.slug}`}
+      to={service.slug === 'consultation' ? '/consultancy' : `/services/${service.slug}`}
       className="group block bg-dark-800/60 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-glow-primary gradient-border"
     >
       <div className="relative h-48 overflow-hidden">

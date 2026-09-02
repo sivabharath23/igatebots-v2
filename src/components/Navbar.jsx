@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/services', hasDropdown: true },
-  { label: 'Consultation', href: '/consultation' },
+  { label: 'Consultancy & Staffing', href: '/consultancy' },
   { label: 'Projects', href: '/projects' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -91,11 +91,10 @@ export default function Navbar() {
     <>
       {/* ── Desktop & Main Navigation Bar ────────────────────────────────────────── */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-dark-900/98 backdrop-blur-xl border-b border-white/10 py-3 shadow-xl'
-            : 'bg-transparent py-5'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+          ? 'bg-dark-900/98 backdrop-blur-xl border-b border-white/10 py-3 shadow-xl'
+          : 'bg-transparent py-5'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -123,18 +122,16 @@ export default function Navbar() {
                     onMouseLeave={scheduleClose}
                   >
                     <button
-                      className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${
-                        isActive(link.href)
-                          ? 'text-white'
-                          : 'text-white/60 hover:text-white hover:bg-white/5'
-                      }`}
+                      className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${isActive(link.href)
+                        ? 'text-white'
+                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                        }`}
                     >
                       <span className="relative z-10 flex items-center gap-1.5">
                         {link.label}
                         <svg
-                          className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                            servicesOpen ? 'rotate-180' : ''
-                          }`}
+                          className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''
+                            }`}
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -161,17 +158,16 @@ export default function Navbar() {
                       ref={dropdownRef}
                       onMouseEnter={openDropdown}
                       onMouseLeave={scheduleClose}
-                      className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-88 max-w-[90vw] transition-all duration-200 z-50 ${
-                        servicesOpen
-                          ? 'opacity-100 translate-y-0 pointer-events-auto'
-                          : 'opacity-0 -translate-y-2 pointer-events-none'
-                      }`}
+                      className={`absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-88 max-w-[90vw] transition-all duration-200 z-50 ${servicesOpen
+                        ? 'opacity-100 translate-y-0 pointer-events-auto'
+                        : 'opacity-0 -translate-y-2 pointer-events-none'
+                        }`}
                     >
                       <div className="bg-dark-800 border border-white/10 rounded-2xl p-2 shadow-2xl shadow-black/80 max-h-[calc(100vh-6rem)] overflow-y-auto">
                         {SERVICES.map((s) => (
                           <Link
                             key={s.id}
-                            to={`/services/${s.slug}`}
+                            to={s.slug === 'consultation' ? '/consultancy' : `/services/${s.slug}`}
                             className="flex items-center gap-3.5 px-4 py-3 rounded-xl hover:bg-primary-500/10 transition-colors duration-150 group/item"
                           >
                             <div className="w-9 h-9 rounded-lg bg-primary-500/10 border border-primary-500/20 flex items-center justify-center text-primary-400 shrink-0 group-hover/item:bg-primary-500/20 transition-colors">
@@ -203,11 +199,10 @@ export default function Navbar() {
                   <Link
                     key={link.label}
                     to={link.href}
-                    className={`px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${
-                      isActive(link.href)
-                        ? 'text-white'
-                        : 'text-white/60 hover:text-white hover:bg-white/5'
-                    }`}
+                    className={`px-4 py-2.5 rounded-lg text-sm font-body transition-colors duration-200 relative ${isActive(link.href)
+                      ? 'text-white'
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                      }`}
                   >
                     <span className="relative z-10">{link.label}</span>
                     {isActive(link.href) && (
@@ -288,11 +283,10 @@ export default function Navbar() {
                 <Link
                   to="/"
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
-                    isActive('/')
-                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
-                      : 'text-white/80 hover:bg-white/5 hover:text-white'
-                  }`}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${isActive('/')
+                    ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                    : 'text-white/80 hover:bg-white/5 hover:text-white'
+                    }`}
                 >
                   Home
                 </Link>
@@ -300,11 +294,10 @@ export default function Navbar() {
                 <Link
                   to="/about"
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
-                    isActive('/about')
-                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
-                      : 'text-white/80 hover:bg-white/5 hover:text-white'
-                  }`}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${isActive('/about')
+                    ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                    : 'text-white/80 hover:bg-white/5 hover:text-white'
+                    }`}
                 >
                   About Us
                 </Link>
@@ -328,7 +321,7 @@ export default function Navbar() {
                   {SERVICES.map((s) => (
                     <Link
                       key={s.id}
-                      to={`/services/${s.slug}`}
+                      to={s.slug === 'consultation' ? '/consultancy' : `/services/${s.slug}`}
                       onClick={() => setMobileOpen(false)}
                       className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-primary-500/10 active:bg-primary-500/20 transition-all group"
                     >
@@ -348,15 +341,14 @@ export default function Navbar() {
                 </div>
 
                 <Link
-                  to="/consultation"
+                  to="/consultancy"
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
-                    isActive('/consultation')
-                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
-                      : 'text-white/80 hover:bg-white/5 hover:text-white'
-                  }`}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${isActive('/consultancy') || isActive('/consultation')
+                    ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                    : 'text-white/80 hover:bg-white/5 hover:text-white'
+                    }`}
                 >
-                  <span>Consultation</span>
+                  <span>Consultancy & Staffing</span>
                   <span className="text-[10px] font-mono px-2 py-0.5 bg-primary-500/20 text-primary-300 rounded-full border border-primary-500/30">
                     NEW
                   </span>
@@ -365,11 +357,10 @@ export default function Navbar() {
                 <Link
                   to="/projects"
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
-                    isActive('/projects')
-                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
-                      : 'text-white/80 hover:bg-white/5 hover:text-white'
-                  }`}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${isActive('/projects')
+                    ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                    : 'text-white/80 hover:bg-white/5 hover:text-white'
+                    }`}
                 >
                   Projects & Portfolio
                 </Link>
@@ -377,11 +368,10 @@ export default function Navbar() {
                 <Link
                   to="/contact"
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${
-                    isActive('/contact')
-                      ? 'bg-primary-500/15 border border-primary-500/30 text-white'
-                      : 'text-white/80 hover:bg-white/5 hover:text-white'
-                  }`}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-body font-medium transition-all ${isActive('/contact')
+                    ? 'bg-primary-500/15 border border-primary-500/30 text-white'
+                    : 'text-white/80 hover:bg-white/5 hover:text-white'
+                    }`}
                 >
                   Contact Us
                 </Link>
