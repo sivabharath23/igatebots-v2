@@ -147,16 +147,16 @@ function Hero() {
             >
               <Link
                 to={s.link}
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/30 hover:shadow-glow-primary hover:-translate-y-0.5"
+                className="btn-primary"
               >
-                Explore Service
+                <span>Explore Service</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-primary-500/40 text-primary-300 font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:border-primary-400 hover:text-white hover:bg-primary-500/10 hover:-translate-y-0.5"
+                className="btn-outline"
               >
                 Get a Free Quote
               </Link>
@@ -275,9 +275,9 @@ function AboutSection() {
             </div>
             <Link
               to="/about"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25"
+              className="btn-primary"
             >
-              Learn More About Us
+              <span>Learn More About Us</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -473,29 +473,28 @@ function TestimonialsSection() {
 function CTASection() {
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(26,108,255,0.12) 0%, rgba(0,200,255,0.06) 100%)' }} />
-      <div className="absolute inset-0 bg-grid-pattern opacity-50" />
+      <div className="absolute inset-0 bg-dark-850/60 border-t border-white/5" />
       <div className="relative max-w-4xl mx-auto px-4 text-center">
         <AnimatedSection>
-          <h2 className="font-display text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             Ready to Build Something <span className="gradient-text">Exceptional?</span>
           </h2>
-          <p className="text-white/45 text-lg mb-10 max-w-xl mx-auto font-body">
-            Let's collaborate to turn your ideas into innovative electronic solutions. Contact us for a free consultation.
+          <p className="text-slate-400 text-base sm:text-lg mb-10 max-w-xl mx-auto font-body">
+            Let's collaborate to turn your concepts into production-grade electronic solutions. Connect directly with our engineering team.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:shadow-xl hover:shadow-primary-500/30"
+              className="btn-primary"
             >
-              Start Your Project
+              <span>Start Your Project</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white/60 hover:text-white hover:border-white/25 font-body font-medium rounded-full text-sm transition-all duration-200"
+              className="btn-outline"
             >
               View All Services
             </Link>

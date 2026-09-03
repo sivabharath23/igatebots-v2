@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import PCBBackground from '../components/PCBBackground';
 import AnimatedSection from '../components/AnimatedSection';
+import EngineeringTelemetryBar from '../components/EngineeringTelemetryBar';
+import HardwareStackupInspector from '../components/HardwareStackupInspector';
+import AdvisoryScopeCalculator from '../components/AdvisoryScopeCalculator';
 import { COMPANY } from '../data/siteData';
 
 const ADVISORY_DOMAINS = [
@@ -80,13 +83,49 @@ const ADVISORY_DOMAINS = [
   },
 ];
 
+function RoleBadgeIcon({ category, className = "w-4 h-4" }) {
+  switch (category) {
+    case 'hardware':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+        </svg>
+      );
+    case 'embedded':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H4.5A2.25 2.25 0 002.25 6v12A2.25 2.25 0 004.5 18.25z" />
+        </svg>
+      );
+    case 'power-ev':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>
+      );
+    case 'testing-qa':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+        </svg>
+      );
+    case 'manufacturing':
+    default:
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      );
+  }
+}
+
 // ── 12 ENGINEERING ROLES FOR PARTNER & CLIENT COMPANY VACANCIES ──────────────
 export const PARTNER_VACANCIES = [
   {
     id: 'electronic-hardware-design-engineer',
-    title: '🔧 Electronic Hardware Design Engineer',
+    title: 'Electronic Hardware Design Engineer',
     rawTitle: 'Electronic Hardware Design Engineer',
-    icon: '🔧',
     category: 'hardware',
     categoryLabel: 'Hardware & Circuit',
     experience: '3 - 7 Years',
@@ -98,9 +137,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'pcb-design-engineer',
-    title: '📐 PCB Design Engineer',
+    title: 'PCB Design Engineer',
     rawTitle: 'PCB Design Engineer',
-    icon: '📐',
     category: 'hardware',
     categoryLabel: 'Hardware & Circuit',
     experience: '2 - 6 Years',
@@ -112,9 +150,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'embedded-hardware-engineer',
-    title: '💻 Embedded Hardware Engineer',
+    title: 'Embedded Hardware Engineer',
     rawTitle: 'Embedded Hardware Engineer',
-    icon: '💻',
     category: 'embedded',
     categoryLabel: 'Embedded Systems',
     experience: '3 - 6 Years',
@@ -126,9 +163,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'component-engineering',
-    title: '🧩 Component / Component Engineering',
-    rawTitle: 'Component / Component Engineering',
-    icon: '🧩',
+    title: 'Component & Obsolescence Engineer',
+    rawTitle: 'Component & Obsolescence Engineer',
     category: 'manufacturing',
     categoryLabel: 'Manufacturing & DFM',
     experience: '2 - 5 Years',
@@ -140,9 +176,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'hardware-validation-testing-engineer',
-    title: '🔬 Hardware Validation & Testing Engineer',
+    title: 'Hardware Validation & Testing Engineer',
     rawTitle: 'Hardware Validation & Testing Engineer',
-    icon: '🔬',
     category: 'testing-qa',
     categoryLabel: 'Validation & Testing',
     experience: '2 - 5 Years',
@@ -154,9 +189,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'power-electronics-engineer',
-    title: '⚡ Power Electronics Engineer',
+    title: 'Power Electronics Engineer',
     rawTitle: 'Power Electronics Engineer',
-    icon: '⚡',
     category: 'power-ev',
     categoryLabel: 'Power & Automotive / EV',
     experience: '4 - 8 Years',
@@ -168,9 +202,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'automotive-electronics-engineer',
-    title: '🚗 Automotive Electronics Engineer',
+    title: 'Automotive Electronics Engineer',
     rawTitle: 'Automotive Electronics Engineer',
-    icon: '🚗',
     category: 'power-ev',
     categoryLabel: 'Power & Automotive / EV',
     experience: '3 - 7 Years',
@@ -182,9 +215,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'ev-electronics-engineer',
-    title: '🔋 EV Electronics Engineer',
-    rawTitle: 'EV Electronics Engineer',
-    icon: '🔋',
+    title: 'EV Electronics Engineer (BMS & Powertrain)',
+    rawTitle: 'EV Electronics Engineer (BMS & Powertrain)',
     category: 'power-ev',
     categoryLabel: 'Power & Automotive / EV',
     experience: '3 - 8 Years',
@@ -196,9 +228,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'embedded-systems-engineer',
-    title: '🖥️ Embedded Systems Engineer',
-    rawTitle: 'Embedded Systems Engineer',
-    icon: '🖥️',
+    title: 'Embedded Systems & Firmware Engineer',
+    rawTitle: 'Embedded Systems & Firmware Engineer',
     category: 'embedded',
     categoryLabel: 'Embedded Systems',
     experience: '2 - 6 Years',
@@ -210,9 +241,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'electronics-manufacturing-production-engineer',
-    title: '🏭 Electronics Manufacturing / Production Engineer',
-    rawTitle: 'Electronics Manufacturing / Production Engineer',
-    icon: '🏭',
+    title: 'Electronics Manufacturing & SMT Engineer',
+    rawTitle: 'Electronics Manufacturing & SMT Engineer',
     category: 'manufacturing',
     categoryLabel: 'Manufacturing & DFM',
     experience: '3 - 7 Years',
@@ -224,9 +254,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'dfm-dft-engineer',
-    title: '📋 DFM / DFT Engineer',
-    rawTitle: 'DFM / DFT Engineer',
-    icon: '📋',
+    title: 'DFM / DFT Quality Engineer',
+    rawTitle: 'DFM / DFT Quality Engineer',
     category: 'manufacturing',
     categoryLabel: 'Manufacturing & DFM',
     experience: '3 - 6 Years',
@@ -238,9 +267,8 @@ export const PARTNER_VACANCIES = [
   },
   {
     id: 'reliability-testing-engineer',
-    title: '🧪 Reliability & Testing Engineer',
-    rawTitle: 'Reliability & Testing Engineer',
-    icon: '🧪',
+    title: 'Reliability & Environmental Testing Engineer',
+    rawTitle: 'Reliability & Environmental Testing Engineer',
     category: 'testing-qa',
     categoryLabel: 'Validation & Testing',
     experience: '3 - 7 Years',
@@ -346,12 +374,16 @@ export default function Consultation() {
 
   // Vacancies Filter & Search State
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedSkillTag, setSelectedSkillTag] = useState('All');
+  const [selectedExperience, setSelectedExperience] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedChecklistId, setExpandedChecklistId] = useState(null);
 
   // Interactive Application / Staffing Modal State
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState('candidate'); // 'candidate' | 'company'
   const [activeVacancyForModal, setActiveVacancyForModal] = useState(PARTNER_VACANCIES[0]);
+  const [appTicketId, setAppTicketId] = useState('IGB-APP-7824');
 
   const [applicantForm, setApplicantForm] = useState({
     name: '',
@@ -398,15 +430,26 @@ export default function Consultation() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Filtered vacancies list
+  // Filtered vacancies list with multi-criteria support
   const filteredVacancies = PARTNER_VACANCIES.filter((v) => {
     const matchesCategory = selectedCategory === 'all' || v.category === selectedCategory;
     const matchesQuery =
+      !searchQuery ||
       v.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       v.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       v.skills.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())) ||
       v.location.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesQuery;
+    const matchesSkillTag =
+      selectedSkillTag === 'All' ||
+      v.skills.some((s) => s.toLowerCase().includes(selectedSkillTag.toLowerCase())) ||
+      v.title.toLowerCase().includes(selectedSkillTag.toLowerCase());
+    const matchesExp =
+      selectedExperience === 'all' ||
+      (selectedExperience === '1-3' && (v.experience.includes('1') || v.experience.includes('2') || v.experience.includes('3'))) ||
+      (selectedExperience === '3-5' && (v.experience.includes('3') || v.experience.includes('4') || v.experience.includes('5'))) ||
+      (selectedExperience === '5+' && (v.experience.includes('5') || v.experience.includes('6') || v.experience.includes('7') || v.experience.includes('8') || v.experience.includes('Lead')));
+
+    return matchesCategory && matchesQuery && matchesSkillTag && matchesExp;
   });
 
   const handleOpenApplyModal = (vacancy, mode = 'candidate') => {
@@ -421,9 +464,18 @@ export default function Consultation() {
   const handleApplicantSubmit = (e) => {
     e.preventDefault();
     setModalSubmitStatus('submitting');
+    const randomCode = Math.floor(1000 + Math.random() * 9000);
+    setAppTicketId(`IGB-ENG-${randomCode}`);
     setTimeout(() => {
       setModalSubmitStatus('success');
     }, 1200);
+  };
+
+  const handleApplyScope = (scope) => {
+    if (scope.domain) setFormData((prev) => ({ ...prev, domain: scope.domain }));
+    if (scope.tier) setBookingTier(scope.tier);
+    if (scope.urgencyText) setFormData((prev) => ({ ...prev, urgency: scope.urgencyText }));
+    if (scope.notes) setFormData((prev) => ({ ...prev, notes: scope.notes }));
   };
 
   const handleCompanySubmit = (e) => {
@@ -470,63 +522,61 @@ export default function Consultation() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
             {/* Top Announcement Badge */}
-            <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-primary-500/10 border border-primary-500/30 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase shadow-glow-primary">
+            <div className="inline-flex items-center gap-3 px-4 py-2 bg-dark-850/90 border border-white/10 rounded-xl text-xs font-mono text-slate-300 mb-8 backdrop-blur-md">
+              <span className="flex items-center gap-2 text-emerald-400 font-medium">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                1-on-1 Technical Advisory & Hardware Strategy
-              </div>
-              <a
-                href="#partner-vacancies"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-accent-500/10 hover:bg-accent-500/20 border border-accent-400/30 rounded-full text-accent-300 text-xs font-body tracking-wider transition-all"
-              >
-                <span className="w-2 h-2 rounded-full bg-accent-400 animate-ping" />
-                ⚡ Hiring for Partner Companies: 12 Open Vacancies &darr;
+                Technical Advisory Desk
+              </span>
+              <span className="text-white/20">|</span>
+              <a href="#partner-vacancies" className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                <span>12 Partner Engineering Openings</span>
+                <span className="text-primary-400 font-bold">&darr;</span>
               </a>
             </div>
 
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 max-w-4xl mx-auto leading-[1.1]">
-              Expert <span className="gradient-text">Engineering Consultancy</span> & Staffing
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 max-w-4xl mx-auto leading-[1.12]">
+              Expert Hardware Consulting & <span className="gradient-text">Engineering Staffing</span>
             </h1>
 
-            <p className="text-white/55 text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed font-body">
-              Eliminate costly PCB re-spins, validate hardware architectures, optimize bill-of-materials, and connect with top-tier electronic talent through our engineering consultancy and partner company vacancy staffing network.
+            <p className="text-slate-300 text-base sm:text-lg max-w-3xl mx-auto mb-10 leading-relaxed font-body">
+              Prevent costly PCB re-spins, validate high-speed architectures, optimize bill-of-materials, and staff specialized electronic engineering talent through our engineering advisory and partner company placement network.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-16">
               <a
                 href="#partner-vacancies"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent-500 to-primary-500 hover:from-accent-400 hover:to-primary-400 text-white font-body font-semibold rounded-full text-sm tracking-wide transition-all duration-200 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-0.5"
+                className="btn-primary"
               >
-                View 12 Partner Vacancies
+                <span>View 12 Partner Vacancies</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
                 </svg>
               </a>
               <a
                 href="#book-consultation"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-500/20 hover:bg-primary-500/30 border border-primary-500/40 text-primary-300 hover:text-white font-body font-medium rounded-full text-sm tracking-wide transition-all duration-200 hover:-translate-y-0.5"
+                className="btn-outline"
               >
-                Schedule Advisory Call
+                Schedule Technical Advisory
               </a>
               <a
                 href="#advisory-domains"
-                className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white/70 hover:text-white hover:border-primary-400/40 hover:bg-white/5 font-body font-medium rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-slate-400 hover:text-white text-sm font-medium transition-colors"
               >
-                Advisory Domains
+                Advisory Domains &rarr;
               </a>
             </div>
 
             {/* Quick Metrics Bar */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-white/10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto pt-6 border-t border-white/[0.08]">
               {[
                 { label: 'Hardware Audits Delivered', value: '150+' },
-                { label: 'First-Pass PCB Success', value: '99%' },
-                { label: 'Partner Company Vacancies', value: '12 Active' },
-                { label: 'Confidentiality Guarantee', value: '100% NDA' },
+                { label: 'First-Pass Layout Success', value: '99.2%' },
+                { label: 'Active Partner Roles', value: '12 Roles' },
+                { label: 'IP & Design Confidentiality', value: '100% NDA' },
               ].map((stat, i) => (
-                <div key={i} className="p-3 bg-dark-800/40 border border-white/5 rounded-xl">
-                  <p className="font-display text-2xl sm:text-3xl font-bold gradient-text">{stat.value}</p>
-                  <p className="text-white/40 text-xs font-body mt-1">{stat.label}</p>
+                <div key={i} className="p-4 bg-dark-850/70 border border-white/[0.07] rounded-xl text-left hover:border-white/15 transition-all">
+                  <p className="font-mono text-2xl sm:text-3xl font-bold text-white tracking-tight">{stat.value}</p>
+                  <p className="text-slate-400 text-xs font-body mt-1">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -534,87 +584,151 @@ export default function Consultation() {
         </div>
       </section>
 
+      {/* ── LIVE ENGINEERING LAB TELEMETRY RIBBON ─────────────────────────────── */}
+      <EngineeringTelemetryBar />
+
       {/* ── 12 OPEN ROLES: HIRING FOR PARTNER & CLIENT COMPANIES ────────────────── */}
       <section id="partner-vacancies" className="py-24 bg-dark-900/90 border-t border-white/5 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-accent-500/10 border border-accent-400/30 rounded-full text-accent-400 text-xs font-body tracking-widest uppercase mb-4 shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-400 animate-pulse" />
-              Talent Acquisition & Staffing
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/[0.04] border border-white/10 rounded-full text-slate-300 text-xs font-mono tracking-wider uppercase mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              Talent Placement & Staffing
             </div>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-white mb-4">
-              Hiring for <span className="gradient-text">Other Company Vacancies</span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+              Hiring for <span className="gradient-text">Partner Company Vacancies</span>
             </h2>
-            <p className="text-white/50 max-w-3xl mx-auto text-base sm:text-lg font-body leading-relaxed">
-              As an electronics engineering consultancy, iGatebots actively sources, technically vets, and places qualified engineering talent for our esteemed partner companies, Tier-1 OEMs, and fast-growing hardware innovators. Explore active openings below or submit your application directly.
+            <p className="text-slate-400 max-w-3xl mx-auto text-base sm:text-lg font-body leading-relaxed">
+              As an electronics engineering consultancy, iGatebots technically evaluates and matches qualified engineering specialists with our partner companies, Tier-1 OEMs, and high-growth hardware ventures.
             </p>
           </AnimatedSection>
 
           {/* Search & Filter Controls */}
-          <div className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-              {VACANCY_CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-body font-medium transition-all ${
-                    selectedCategory === cat.id
-                      ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/25 border border-primary-400'
-                      : 'bg-dark-800/80 border border-white/10 text-white/60 hover:text-white hover:border-white/20'
-                  }`}
-                >
-                  {cat.label}
-                  <span
-                    className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] ${
-                      selectedCategory === cat.id ? 'bg-white/20 text-white' : 'bg-white/10 text-white/40'
+          <div className="mb-6 space-y-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                {VACANCY_CATEGORIES.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-mono font-medium transition-all ${
+                      selectedCategory === cat.id
+                        ? 'bg-primary-600 text-white shadow-md shadow-primary-600/20 border border-primary-500'
+                        : 'bg-dark-850/80 border border-white/[0.08] text-slate-400 hover:text-white hover:border-white/20'
                     }`}
                   >
-                    {cat.id === 'all'
-                      ? PARTNER_VACANCIES.length
-                      : PARTNER_VACANCIES.filter((v) => v.category === cat.id).length}
-                  </span>
-                </button>
-              ))}
+                    {cat.label}
+                    <span
+                      className={`ml-1.5 px-1.5 py-0.5 rounded text-[10px] ${
+                        selectedCategory === cat.id ? 'bg-white/20 text-white' : 'bg-white/5 text-slate-400'
+                      }`}
+                    >
+                      {cat.id === 'all'
+                        ? PARTNER_VACANCIES.length
+                        : PARTNER_VACANCIES.filter((v) => v.category === cat.id).length}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Right Controls: Experience & Search */}
+              <div className="flex items-center gap-2.5 w-full md:w-auto">
+                {/* Experience Dropdown */}
+                <select
+                  value={selectedExperience}
+                  onChange={(e) => setSelectedExperience(e.target.value)}
+                  className="bg-dark-850 border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-primary-400"
+                >
+                  <option value="all">All Experience</option>
+                  <option value="1-3">1 - 3 Years</option>
+                  <option value="3-5">3 - 5 Years</option>
+                  <option value="5+">5+ Years (Lead / Senior)</option>
+                </select>
+
+                {/* Keyword Search */}
+                <div className="relative flex-1 md:w-64">
+                  <input
+                    type="text"
+                    placeholder="Search skills, tools, roles..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full bg-dark-850 border border-white/10 rounded-xl pl-9 pr-7 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary-400 transition-all font-body"
+                  />
+                  <svg
+                    className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs"
+                    >
+                      &times;
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
 
-            {/* Keyword Search */}
-            <div className="relative w-full md:w-72">
-              <input
-                type="text"
-                placeholder="Search skills, tools, roles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-dark-800/90 border border-white/10 rounded-full pl-10 pr-4 py-2 text-xs text-white placeholder-white/30 focus:outline-none focus:border-primary-400 transition-all"
-              />
-              <svg
-                className="w-4 h-4 text-white/40 absolute left-3.5 top-1/2 -translate-y-1/2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
-              {searchQuery && (
+            {/* Quick Skill / Toolchain Chips Row */}
+            <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/5">
+              <span className="text-[11px] font-mono text-slate-400 mr-1.5 uppercase">Quick Tool Filter:</span>
+              {[
+                'All',
+                'Altium',
+                'KiCad',
+                'STM32',
+                'CAN-FD',
+                'High-Speed',
+                'BLE',
+                'BMS',
+                'DFM',
+              ].map((tool) => (
                 <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs"
+                  key={tool}
+                  type="button"
+                  onClick={() => setSelectedSkillTag(tool)}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all ${
+                    selectedSkillTag === tool
+                      ? 'bg-primary-500/20 text-primary-300 border border-primary-500/40'
+                      : 'bg-dark-900/80 text-slate-400 hover:text-white border border-white/5'
+                  }`}
                 >
-                  &times;
+                  {tool}
+                </button>
+              ))}
+
+              {(selectedCategory !== 'all' || selectedSkillTag !== 'All' || selectedExperience !== 'all' || searchQuery) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedCategory('all');
+                    setSelectedSkillTag('All');
+                    setSelectedExperience('all');
+                    setSearchQuery('');
+                  }}
+                  className="ml-auto text-[11px] font-mono text-slate-400 hover:text-primary-400 underline transition-colors"
+                >
+                  Reset Filters
                 </button>
               )}
             </div>
           </div>
 
           {/* Results Summary */}
-          <div className="flex items-center justify-between text-xs text-white/40 mb-6 font-mono">
+          <div className="flex items-center justify-between text-xs text-slate-400 mb-6 font-mono">
             <span>
-              Displaying {filteredVacancies.length} of {PARTNER_VACANCIES.length} open roles for partner companies
+              Displaying {filteredVacancies.length} of {PARTNER_VACANCIES.length} verified partner openings
             </span>
             <span className="flex items-center gap-1.5 text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Actively Screening Candidates
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              Pre-Screening Live in Bangalore Lab
             </span>
           </div>
 
@@ -622,56 +736,94 @@ export default function Consultation() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {filteredVacancies.map((vacancy) => (
               <AnimatedSection key={vacancy.id}>
-                <div className="bg-dark-800/70 border border-white/10 rounded-2xl p-6 h-full flex flex-col justify-between hover:border-primary-500/40 hover:bg-dark-800/90 hover:shadow-xl hover:shadow-primary-500/5 transition-all duration-300 group">
+                <div className="bg-dark-850/70 border border-white/[0.08] rounded-2xl p-6 h-full flex flex-col justify-between hover:border-primary-500/40 hover:bg-dark-850 hover:shadow-xl transition-all duration-300 group">
                   <div>
                     {/* Top Row: Tag & Openings */}
                     <div className="flex items-center justify-between gap-2 mb-4">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full text-[11px] font-mono">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        Partner Vacancy
-                      </span>
-                      <span className="text-[11px] font-mono text-primary-400/90 px-2 py-0.5 bg-primary-500/10 rounded-md">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/[0.04] border border-white/10 text-slate-300 rounded-lg text-xs font-mono">
+                        <RoleBadgeIcon category={vacancy.category} className="w-3.5 h-3.5 text-primary-400" />
+                        <span>{vacancy.categoryLabel}</span>
+                      </div>
+                      <span className="text-[11px] font-mono text-primary-300 px-2 py-0.5 bg-primary-500/10 rounded-md border border-primary-500/20">
                         {vacancy.openings}
                       </span>
                     </div>
 
-                    {/* Role Title with Exact User Emoji */}
-                    <h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-primary-300 transition-colors flex items-start gap-2">
-                      <span>{vacancy.title}</span>
+                    {/* Role Title */}
+                    <h3 className="font-display text-lg font-bold text-white mb-2.5 group-hover:text-primary-300 transition-colors">
+                      {vacancy.title}
                     </h3>
 
                     {/* Meta info tags */}
-                    <div className="flex flex-wrap items-center gap-2 mb-4 text-xs font-body text-white/50">
-                      <span className="inline-flex items-center gap-1 bg-white/5 px-2.5 py-1 rounded-md border border-white/5">
+                    <div className="flex flex-wrap items-center gap-2 mb-4 text-xs font-body text-slate-400">
+                      <span className="inline-flex items-center gap-1 bg-white/[0.04] px-2.5 py-1 rounded-lg border border-white/5 font-mono">
                         <svg className="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         {vacancy.experience}
                       </span>
-                      <span className="inline-flex items-center gap-1 bg-white/5 px-2.5 py-1 rounded-md border border-white/5">
+                      <span className="inline-flex items-center gap-1 bg-white/[0.04] px-2.5 py-1 rounded-lg border border-white/5">
                         <svg className="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                         {vacancy.location}
                       </span>
                     </div>
 
-                    <p className="text-white/55 text-xs sm:text-sm leading-relaxed mb-5 font-body">
+                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4 font-body">
                       {vacancy.description}
                     </p>
 
+                    {/* Technical Screening Focus Expandable */}
+                    <div className="mb-4">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setExpandedChecklistId(expandedChecklistId === vacancy.id ? null : vacancy.id)
+                        }
+                        className="w-full text-left py-1.5 px-2.5 bg-dark-900/60 hover:bg-dark-900 border border-white/5 rounded-lg text-[11px] font-mono text-slate-400 hover:text-slate-200 flex items-center justify-between transition-colors"
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
+                          Evaluation & Interview Criteria
+                        </span>
+                        <span className="text-[10px] text-primary-400">
+                          {expandedChecklistId === vacancy.id ? 'Hide ▲' : 'Inspect ▼'}
+                        </span>
+                      </button>
+
+                      {expandedChecklistId === vacancy.id && (
+                        <div className="mt-2 p-3 bg-dark-900/90 rounded-lg border border-white/10 text-[11px] font-mono space-y-1.5 text-slate-300 animate-fadeIn">
+                          <div className="flex items-start gap-1.5 text-primary-300">
+                            <span className="text-primary-400 font-bold shrink-0">1.</span>
+                            <span>CAD Review: Schematic structure, DRC rules & footprint IPC compliance.</span>
+                          </div>
+                          <div className="flex items-start gap-1.5 text-slate-300">
+                            <span className="text-primary-400 font-bold shrink-0">2.</span>
+                            <span>Lab Bringup: Oscilloscope serial bus decoding & hardware troubleshooting.</span>
+                          </div>
+                          <div className="flex items-start gap-1.5 text-emerald-400">
+                            <span className="text-emerald-400 font-bold shrink-0">3.</span>
+                            <span>Direct Referral: High-priority interview slot with partner engineering leadership.</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
                     {/* Required Skills Chips */}
-                    <div className="space-y-2 mb-6">
-                      <p className="text-[11px] font-mono uppercase tracking-wider text-white/30">Target Competencies:</p>
+                    <div className="space-y-1.5 mb-5">
+                      <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400">Core Competencies:</p>
                       <div className="flex flex-wrap gap-1.5">
                         {vacancy.skills.map((skill) => (
-                          <span
+                          <button
                             key={skill}
-                            className="text-[11px] font-body bg-dark-900/80 text-white/70 px-2 py-0.5 rounded border border-white/5"
+                            type="button"
+                            onClick={() => setSearchQuery(skill)}
+                            className="text-[11px] font-mono bg-dark-900/90 hover:bg-primary-500/20 text-slate-300 hover:text-white px-2.5 py-1 rounded-md border border-white/[0.06] transition-colors"
+                            title={`Filter by ${skill}`}
                           >
                             {skill}
-                          </span>
+                          </button>
                         ))}
                       </div>
                     </div>
@@ -681,7 +833,7 @@ export default function Consultation() {
                   <div className="pt-4 border-t border-white/5 flex items-center gap-2">
                     <button
                       onClick={() => handleOpenApplyModal(vacancy, 'candidate')}
-                      className="flex-1 py-2.5 px-4 bg-primary-500 hover:bg-primary-400 text-white text-xs font-body font-medium rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-primary-500/20"
+                      className="flex-1 py-2.5 px-4 bg-primary-600 hover:bg-primary-500 text-white text-xs font-body font-semibold rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.98]"
                     >
                       Apply for Role
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -690,7 +842,7 @@ export default function Consultation() {
                     </button>
                     <button
                       onClick={() => handleOpenApplyModal(vacancy, 'company')}
-                      className="py-2.5 px-3 border border-white/15 hover:border-primary-400/40 hover:bg-white/5 text-white/70 hover:text-white text-xs font-body rounded-xl transition-all"
+                      className="py-2.5 px-3 border border-white/15 hover:border-white/30 hover:bg-white/[0.04] text-slate-300 hover:text-white text-xs font-body rounded-xl transition-all"
                       title="Hire engineers for this role at your company"
                     >
                       Hire Talent
@@ -703,53 +855,53 @@ export default function Consultation() {
 
           {/* Employer Staffing Banner */}
           <AnimatedSection>
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-dark-800 via-dark-800 to-primary-950/40 border border-primary-500/30 p-8 sm:p-10 shadow-2xl">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-                <div className="max-w-2xl text-center lg:text-left">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase text-primary-400 tracking-wider mb-2">
-                    <span className="w-2 h-2 rounded-full bg-primary-400" />
-                    For Employers & Hardware Teams
-                  </span>
-                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-3">
-                    Looking to Hire Specialized Electronics Engineers for Your Company?
-                  </h3>
-                  <p className="text-white/55 text-sm sm:text-base leading-relaxed font-body">
-                    Avoid mis-hires and shorten time-to-hire. iGatebots conducts deep technical evaluations led by experienced hardware and embedded architects to supply pre-vetted engineers directly to your team.
-                  </p>
-                </div>
-                <div className="shrink-0 flex flex-col sm:flex-row gap-3">
-                  <button
-                    onClick={() => handleOpenApplyModal(PARTNER_VACANCIES[0], 'company')}
-                    className="px-8 py-4 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm transition-all shadow-lg shadow-primary-500/30 text-center"
-                  >
-                    Request Talent Consultation
-                  </button>
-                  <a
-                    href={`mailto:${COMPANY.email}?subject=Partner%20Company%20Engineering%20Staffing%20Inquiry`}
-                    className="px-6 py-4 border border-white/20 hover:border-white/40 text-white/80 hover:text-white font-body text-sm rounded-full transition-all text-center"
-                  >
-                    Email Staffing Desk
-                  </a>
+            <div className="relative rounded-2xl overflow-hidden bg-dark-850 border border-white/10 p-8 sm:p-10 shadow-xl">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                  <div className="max-w-2xl text-center lg:text-left">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase text-primary-400 tracking-wider mb-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
+                      For Employers & Hardware Engineering Teams
+                    </span>
+                    <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-3">
+                      Need Dedicated Electronic Engineers for Your In-House Team?
+                    </h3>
+                    <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-body">
+                      Avoid mis-hires and shorten time-to-hire. iGatebots conducts comprehensive technical screening led by senior hardware and embedded architects to place vetted engineers directly with your organization.
+                    </p>
+                  </div>
+                  <div className="shrink-0 flex flex-col sm:flex-row gap-3">
+                    <button
+                      onClick={() => handleOpenApplyModal(PARTNER_VACANCIES[0], 'company')}
+                      className="btn-primary text-center"
+                    >
+                      Request Staffing Call
+                    </button>
+                    <a
+                      href={`mailto:${COMPANY.email}?subject=Partner%20Company%20Engineering%20Staffing%20Inquiry`}
+                      className="btn-outline text-center"
+                    >
+                      Email Staffing Desk
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
         </div>
       </section>
 
       {/* ── ADVISORY FOCUS DOMAINS ──────────────────────────────────────────────── */}
-      <section id="advisory-domains" className="py-24 bg-dark-800/30 border-t border-white/5 relative">
+      <section id="advisory-domains" className="py-24 bg-dark-900/60 border-t border-white/5 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/[0.04] border border-white/10 rounded-full text-slate-300 text-xs font-mono tracking-wider uppercase mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
               Specialized Guidance
             </div>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-white mb-4">
-              Key <span className="gradient-text">Consultation Areas</span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+              Core Technical <span className="gradient-text">Advisory Domains</span>
             </h2>
-            <p className="text-white/45 max-w-2xl mx-auto text-base font-body">
-              Whether you need strategic architecture planning, production validation, or emergency lab debugging, we provide targeted technical insights.
+            <p className="text-slate-400 max-w-2xl mx-auto text-base font-body">
+              Whether you require upfront architecture review, high-density stackup optimization, or root-cause bench debugging, we provide actionable engineering solutions.
             </p>
           </AnimatedSection>
 
@@ -761,35 +913,35 @@ export default function Consultation() {
                 <div
                   key={domain.id}
                   onClick={() => setSelectedDomain(domain.id)}
-                  className={`cursor-pointer rounded-2xl p-7 transition-all duration-300 relative border ${
+                  className={`cursor-pointer rounded-2xl p-7 transition-all duration-200 relative border ${
                     isSelected
-                      ? 'bg-dark-800/90 border-primary-500/50 shadow-lg shadow-primary-500/15 -translate-y-1'
-                      : 'bg-dark-800/50 border-white/5 hover:border-white/15 hover:bg-dark-800/70'
+                      ? 'bg-dark-850 border-primary-500/60 shadow-lg'
+                      : 'bg-dark-850/60 border-white/[0.07] hover:border-white/20 hover:bg-dark-850'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-5">
                     <div
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${
+                      className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors ${
                         isSelected
-                          ? 'bg-primary-500 text-white shadow-glow-primary'
-                          : 'bg-primary-500/10 text-primary-400 border border-primary-500/20'
+                          ? 'bg-primary-600 text-white'
+                          : 'bg-white/[0.04] text-primary-400 border border-white/10'
                       }`}
                     >
                       {domain.icon}
                     </div>
-                    <span className="text-xs font-mono uppercase tracking-wider text-primary-400/80 px-2.5 py-1 bg-primary-500/10 rounded-full border border-primary-500/20">
+                    <span className="text-xs font-mono uppercase tracking-wider text-slate-300 px-2.5 py-1 bg-white/[0.04] rounded-md border border-white/10">
                       {domain.tag}
                     </span>
                   </div>
 
                   <h3 className="font-display text-lg font-bold text-white mb-2">{domain.title}</h3>
-                  <p className="text-white/45 text-sm leading-relaxed mb-6 font-body">{domain.description}</p>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-6 font-body">{domain.description}</p>
 
                   <div className="space-y-2 pt-4 border-t border-white/5">
                     {domain.topics.map((t) => (
                       <div key={t} className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-primary-400 shrink-0" />
-                        <span className="text-white/60 text-xs font-body">{t}</span>
+                        <span className="text-slate-300 text-xs font-body">{t}</span>
                       </div>
                     ))}
                   </div>
@@ -801,20 +953,20 @@ export default function Consultation() {
           {/* Active Domain Spotlight banner */}
           {activeDomainData && (
             <AnimatedSection>
-              <div className="bg-gradient-to-r from-primary-900/40 via-dark-800 to-dark-900 border border-primary-500/30 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="bg-dark-850 border border-white/10 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg">
                 <div>
-                  <span className="text-xs font-mono uppercase text-primary-400 tracking-wider">Ready to review</span>
+                  <span className="text-xs font-mono uppercase text-primary-400 tracking-wider">Ready for review</span>
                   <h4 className="font-display text-2xl font-bold text-white mt-1">{activeDomainData.title}</h4>
-                  <p className="text-white/50 text-sm max-w-2xl mt-1 font-body">
-                    Schedule an advisory session specifically tailored to {activeDomainData.title.toLowerCase()}.
+                  <p className="text-slate-400 text-sm max-w-2xl mt-1 font-body">
+                    Schedule an advisory sprint tailored to your project's specific {activeDomainData.title.toLowerCase()} requirements.
                   </p>
                 </div>
                 <a
                   href="#book-consultation"
                   onClick={() => setFormData((p) => ({ ...p, domain: activeDomainData.id }))}
-                  className="shrink-0 px-6 py-3 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-medium rounded-full transition-all hover:shadow-lg hover:shadow-primary-500/25"
+                  className="btn-primary shrink-0"
                 >
-                  Consult on This Domain &rarr;
+                  Book Session on This Domain &rarr;
                 </a>
               </div>
             </AnimatedSection>
@@ -822,19 +974,28 @@ export default function Consultation() {
         </div>
       </section>
 
+      {/* ── INTERACTIVE HARDWARE STACKUP & DFM LAB INSPECTOR ─────────────────────── */}
+      <section className="py-20 bg-dark-900/60 border-t border-white/5 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection>
+            <HardwareStackupInspector />
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* ── PACKAGES & TIERS ────────────────────────────────────────────────────── */}
       <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/[0.04] border border-white/10 rounded-full text-slate-300 text-xs font-mono tracking-wider uppercase mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
               Engagement Formats
             </div>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-white mb-4">
-              Flexible <span className="gradient-text">Consultation Tiers</span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+              Flexible <span className="gradient-text">Advisory Formats</span>
             </h2>
-            <p className="text-white/45 max-w-xl mx-auto text-base font-body">
-              Select the engagement model that fits your project velocity and technical requirements.
+            <p className="text-slate-400 max-w-xl mx-auto text-base font-body">
+              Select an engagement model that matches your project velocity and engineering scope.
             </p>
           </AnimatedSection>
 
@@ -844,40 +1005,40 @@ export default function Consultation() {
               return (
                 <AnimatedSection key={pkg.id}>
                   <div
-                    className={`rounded-3xl p-8 flex flex-col justify-between h-full transition-all duration-300 relative ${
+                    className={`rounded-2xl p-8 flex flex-col justify-between h-full transition-all duration-200 relative ${
                       isAudit
-                        ? 'bg-dark-800 border-2 border-primary-500 shadow-2xl shadow-primary-500/20 md:-translate-y-2'
-                        : 'bg-dark-800/60 border border-white/8 hover:border-white/20'
+                        ? 'bg-dark-850 border-2 border-primary-500 shadow-2xl md:-translate-y-2'
+                        : 'bg-dark-850/60 border border-white/[0.08] hover:border-white/20'
                     }`}
                   >
                     {isAudit && (
-                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary-500 to-accent-400 text-white text-xs font-body font-bold rounded-full uppercase tracking-wider shadow-lg">
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 bg-primary-600 text-white text-[11px] font-mono font-bold rounded-full uppercase tracking-wider shadow-md">
                         Recommended
                       </div>
                     )}
 
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-4">
-                        <span className="text-xs font-mono uppercase text-primary-400 px-3 py-1 bg-primary-500/10 rounded-full border border-primary-500/20">
+                        <span className="text-xs font-mono uppercase text-primary-300 px-2.5 py-1 bg-primary-500/10 rounded-md border border-primary-500/20">
                           {pkg.badge}
                         </span>
-                        <span className="text-xs text-white/40 font-body">{pkg.duration}</span>
+                        <span className="text-xs text-slate-400 font-mono">{pkg.duration}</span>
                       </div>
 
                       <h3 className="font-display text-2xl font-bold text-white mb-2">{pkg.name}</h3>
-                      <p className="text-primary-300 font-display font-semibold text-lg mb-4">{pkg.price}</p>
-                      <p className="text-white/45 text-sm leading-relaxed mb-8 font-body">{pkg.description}</p>
+                      <p className="text-primary-400 font-mono font-bold text-base mb-4">{pkg.price}</p>
+                      <p className="text-slate-400 text-sm leading-relaxed mb-8 font-body">{pkg.description}</p>
 
                       <div className="space-y-3 mb-8">
-                        <p className="text-xs font-mono uppercase text-white/30 tracking-wider">What’s Included:</p>
+                        <p className="text-xs font-mono uppercase text-slate-400 tracking-wider">What’s Included:</p>
                         {pkg.features.map((f) => (
                           <div key={f} className="flex items-start gap-3">
-                            <div className="w-5 h-5 rounded-full bg-primary-500/20 flex items-center justify-center text-primary-400 shrink-0 mt-0.5">
-                              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                            <div className="w-4 h-4 rounded-md bg-primary-500/15 flex items-center justify-center text-primary-400 shrink-0 mt-0.5 border border-primary-500/20">
+                              <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                               </svg>
                             </div>
-                            <span className="text-white/70 text-sm font-body leading-snug">{f}</span>
+                            <span className="text-slate-300 text-sm font-body leading-snug">{f}</span>
                           </div>
                         ))}
                       </div>
@@ -886,10 +1047,10 @@ export default function Consultation() {
                     <a
                       href="#book-consultation"
                       onClick={() => setBookingTier(pkg.id)}
-                      className={`w-full py-3.5 rounded-full text-sm font-body font-medium flex items-center justify-center gap-2 transition-all ${
+                      className={`w-full py-3 rounded-xl text-sm font-body font-semibold flex items-center justify-center gap-2 transition-all ${
                         isAudit
-                          ? 'bg-primary-500 hover:bg-primary-400 text-white shadow-lg shadow-primary-500/30'
-                          : 'border border-white/20 text-white hover:bg-white/5 hover:border-white/40'
+                          ? 'btn-primary'
+                          : 'btn-outline'
                       }`}
                     >
                       Choose {pkg.name.split(' ')[0]}
@@ -960,58 +1121,67 @@ export default function Consultation() {
         </div>
       </section>
 
+      {/* ── INTERACTIVE ADVISORY SCOPING CALCULATOR ──────────────────────────── */}
+      <section className="py-20 bg-dark-900/80 border-t border-white/5 relative">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection>
+            <AdvisoryScopeCalculator onApplyScope={handleApplyScope} />
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* ── INTERACTIVE CONSULTATION BOOKING WIZARD ──────────────────────────────── */}
       <section id="book-consultation" className="py-24 relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/[0.04] border border-white/10 rounded-full text-slate-300 text-xs font-mono tracking-wider uppercase mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
               Direct Engineering Access
             </div>
-            <h2 className="font-display text-4xl lg:text-5xl font-bold text-white mb-4">
-              Request Your <span className="gradient-text">Advisory Session</span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+              Schedule Your <span className="gradient-text">Technical Advisory Session</span>
             </h2>
-            <p className="text-white/45 max-w-xl mx-auto text-base font-body">
-              Fill out your project parameters below. Our engineering team will review and confirm your session within 24 hours.
+            <p className="text-slate-400 max-w-xl mx-auto text-base font-body">
+              Submit your engineering parameters below. Our hardware leadership will review the scope and confirm your session within 24 hours.
             </p>
           </AnimatedSection>
 
-          <div className="bg-dark-800/90 border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative gradient-border">
+          <div className="bg-dark-850 border border-white/10 rounded-2xl p-6 sm:p-10 shadow-xl relative">
             {submitStatus === 'success' ? (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-12"
               >
-                <div className="w-20 h-20 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto mb-6 text-emerald-400 shadow-lg shadow-emerald-500/20">
-                  <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6 text-emerald-400 shadow-sm">
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="font-display text-3xl font-bold text-white mb-3">Consultation Request Received!</h3>
-                <p className="text-white/60 text-base max-w-lg mx-auto font-body mb-6">
-                  Thank you, <span className="text-white font-semibold">{formData.name || 'there'}</span>. A senior hardware engineer has been assigned to review your inquiry for the <span className="text-primary-300 font-semibold">{formData.domain}</span> domain.
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-3">Consultation Request Confirmed</h3>
+                <p className="text-slate-300 text-base max-w-lg mx-auto font-body mb-6">
+                  Thank you, <span className="text-white font-semibold">{formData.name || 'there'}</span>. A lead hardware architect has been assigned to inspect your inquiry for the <span className="text-primary-400 font-medium">{formData.domain}</span> domain.
                 </p>
 
-                <div className="bg-dark-900/80 border border-white/10 rounded-2xl p-6 max-w-md mx-auto text-left mb-8 space-y-2">
-                  <p className="text-xs font-mono uppercase text-white/40">Next Steps Checklist:</p>
-                  <div className="flex items-center gap-2 text-white/70 text-sm font-body">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
-                    We will send our mutual NDA to <span className="text-white font-medium">{formData.email}</span>.
+                <div className="bg-dark-900 border border-white/10 rounded-xl p-6 max-w-md mx-auto text-left mb-8 space-y-2.5">
+                  <p className="text-xs font-mono uppercase text-slate-400">Next Steps Checklist:</p>
+                  <div className="flex items-center gap-2.5 text-slate-300 text-xs sm:text-sm font-body">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-400 shrink-0" />
+                    <span>Mutual NDA dispatched to <span className="text-white font-medium">{formData.email}</span>.</span>
                   </div>
-                  <div className="flex items-center gap-2 text-white/70 text-sm font-body">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
-                    You’ll receive a direct calendar invitation link with our lead architect.
+                  <div className="flex items-center gap-2.5 text-slate-300 text-xs sm:text-sm font-body">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-400 shrink-0" />
+                    <span>Direct calendar invite with lead hardware architect.</span>
                   </div>
-                  <div className="flex items-center gap-2 text-white/70 text-sm font-body">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
-                    Secure upload portal link for CAD/Gerber files.
+                  <div className="flex items-center gap-2.5 text-slate-300 text-xs sm:text-sm font-body">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-400 shrink-0" />
+                    <span>Encrypted file transfer link for CAD/Gerber/BOM datasets.</span>
                   </div>
                 </div>
 
                 <button
                   onClick={() => setSubmitStatus('idle')}
-                  className="px-8 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm transition-all"
+                  className="btn-primary"
                 >
                   Submit Another Inquiry
                 </button>
@@ -1020,8 +1190,8 @@ export default function Consultation() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Step 1: Select Format */}
                 <div>
-                  <label className="text-white/60 text-xs font-mono uppercase tracking-wider block mb-3">
-                    1. Select Consultation Engagement Tier
+                  <label className="text-slate-400 text-xs font-mono uppercase tracking-wider block mb-3">
+                    1. Select Advisory Engagement Format
                   </label>
                   <div className="grid sm:grid-cols-3 gap-3">
                     {PACKAGES.map((pkg) => (
@@ -1031,12 +1201,12 @@ export default function Consultation() {
                         onClick={() => setBookingTier(pkg.id)}
                         className={`text-left p-4 rounded-xl border transition-all ${
                           bookingTier === pkg.id
-                            ? 'bg-primary-500/15 border-primary-500 text-white shadow-sm'
-                            : 'bg-white/5 border-white/8 text-white/60 hover:border-white/20'
+                            ? 'bg-primary-600/10 border-primary-500 text-white shadow-sm'
+                            : 'bg-dark-900/60 border-white/[0.08] text-slate-400 hover:border-white/20 hover:text-white'
                         }`}
                       >
                         <p className="font-display font-bold text-sm text-white mb-1">{pkg.name.split('&')[0]}</p>
-                        <p className="text-xs text-primary-300 font-mono">{pkg.duration}</p>
+                        <p className="text-xs text-primary-400 font-mono">{pkg.duration}</p>
                       </button>
                     ))}
                   </div>
@@ -1044,7 +1214,7 @@ export default function Consultation() {
 
                 {/* Step 2: Select Area of Focus */}
                 <div>
-                  <label className="text-white/60 text-xs font-mono uppercase tracking-wider block mb-3">
+                  <label className="text-slate-400 text-xs font-mono uppercase tracking-wider block mb-3">
                     2. Primary Technical Focus
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -1055,8 +1225,8 @@ export default function Consultation() {
                         onClick={() => setFormData((p) => ({ ...p, domain: domain.id }))}
                         className={`text-left p-3.5 rounded-xl border text-xs font-body transition-all ${
                           formData.domain === domain.id
-                            ? 'bg-primary-500/15 border-primary-500 text-white font-medium'
-                            : 'bg-white/5 border-white/8 text-white/60 hover:border-white/20'
+                            ? 'bg-primary-600/15 border-primary-500 text-white font-medium'
+                            : 'bg-dark-900/60 border-white/[0.08] text-slate-400 hover:border-white/20 hover:text-white'
                         }`}
                       >
                         {domain.title}
@@ -1067,18 +1237,18 @@ export default function Consultation() {
                       onClick={() => setFormData((p) => ({ ...p, domain: 'staffing-vacancies' }))}
                       className={`text-left p-3.5 rounded-xl border text-xs font-body transition-all ${
                         formData.domain === 'staffing-vacancies'
-                          ? 'bg-accent-500/20 border-accent-400 text-white font-medium'
-                          : 'bg-white/5 border-white/8 text-white/60 hover:border-white/20'
+                          ? 'bg-primary-600/15 border-primary-500 text-white font-medium'
+                          : 'bg-dark-900/60 border-white/[0.08] text-slate-400 hover:border-white/20 hover:text-white'
                       }`}
                     >
-                      ⚡ Partner Vacancy / Talent Staffing
+                      Engineering Talent & Staffing
                     </button>
                   </div>
                 </div>
 
                 {/* Step 3: Contact & Project Parameters */}
                 <div className="space-y-4">
-                  <label className="text-white/60 text-xs font-mono uppercase tracking-wider block">
+                  <label className="text-slate-400 text-xs font-mono uppercase tracking-wider block">
                     3. Contact & Project Parameters
                   </label>
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -1090,7 +1260,7 @@ export default function Consultation() {
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="Full Name *"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary-400 focus:bg-primary-500/5 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                     <div>
@@ -1100,8 +1270,8 @@ export default function Consultation() {
                         required
                         value={formData.email}
                         onChange={handleInputChange}
-                        placeholder="Work Email *"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary-400 focus:bg-primary-500/5 transition-all"
+                        placeholder="Work Email Address *"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                     <div>
@@ -1110,8 +1280,8 @@ export default function Consultation() {
                         name="company"
                         value={formData.company}
                         onChange={handleInputChange}
-                        placeholder="Company / Organization"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary-400 focus:bg-primary-500/5 transition-all"
+                        placeholder="Company / Organization Name"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                     <div>
@@ -1121,41 +1291,41 @@ export default function Consultation() {
                         value={formData.phone}
                         onChange={handleInputChange}
                         placeholder="Phone / WhatsApp Number"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary-400 focus:bg-primary-500/5 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-white/40 text-xs font-body mb-1 block">Project Stage / Inquiry Type</label>
+                      <label className="text-slate-400 text-xs font-body mb-1 block">Project Stage / Inquiry Scope</label>
                       <select
                         name="projectStage"
                         value={formData.projectStage}
                         onChange={handleInputChange}
-                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-primary-400"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-primary-400 font-body"
                       >
-                        <option value="Concept / Ideation">Concept / Ideation</option>
-                        <option value="Schematic in progress">Schematic in progress</option>
-                        <option value="PCB layout review ready">PCB layout review ready</option>
-                        <option value="Prototype bring-up failure / debugging">Prototype bring-up failure / debugging</option>
-                        <option value="Preparing for high-volume production">Preparing for high-volume production</option>
-                        <option value="Hiring / Staffing Requisition">Hiring / Staffing Requisition</option>
+                        <option value="Concept / Ideation">Concept / System Architecture</option>
+                        <option value="Schematic in progress">Schematic & Component Selection</option>
+                        <option value="PCB layout review ready">PCB Layout & DFM Review Ready</option>
+                        <option value="Prototype bring-up failure / debugging">Prototype Bring-Up Debugging</option>
+                        <option value="Preparing for high-volume production">Preparing for Mass Production</option>
+                        <option value="Hiring / Staffing Requisition">Partner Company Staffing Need</option>
                       </select>
                     </div>
 
                     <div>
-                      <label className="text-white/40 text-xs font-body mb-1 block">Urgency Timeline</label>
+                      <label className="text-slate-400 text-xs font-body mb-1 block">Urgency Timeline</label>
                       <select
                         name="urgency"
                         value={formData.urgency}
                         onChange={handleInputChange}
-                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-primary-400"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-primary-400 font-body"
                       >
-                        <option value="Standard (Next few days)">Standard (Next few days)</option>
-                        <option value="Urgent (Within 24-48 hours)">Urgent (Within 24-48 hours)</option>
-                        <option value="Critical (Emergency bring-up support)">Critical (Emergency bring-up support)</option>
-                        <option value="Planning for next quarter">Planning for next quarter</option>
+                        <option value="Standard (Next few days)">Standard (Within 2-3 business days)</option>
+                        <option value="Urgent (Within 24-48 hours)">Priority (Within 24-48 hours)</option>
+                        <option value="Critical (Emergency bring-up support)">Critical (Emergency Lab Bring-up)</option>
+                        <option value="Planning for next quarter">Roadmap (Future Project Milestone)</option>
                       </select>
                     </div>
                   </div>
@@ -1166,8 +1336,8 @@ export default function Consultation() {
                       rows={4}
                       value={formData.notes}
                       onChange={handleInputChange}
-                      placeholder="Briefly describe your hardware challenge, target MCU/ICs, or specific talent role required..."
-                      className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary-400 focus:bg-primary-500/5 transition-all resize-none"
+                      placeholder="Briefly describe your hardware challenge, target MCU/ICs, or specific engineering profile required..."
+                      className="w-full bg-dark-900 border border-white/10 rounded-xl p-4 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body resize-none"
                     />
                   </div>
 
@@ -1178,10 +1348,10 @@ export default function Consultation() {
                       name="ndaRequired"
                       checked={formData.ndaRequired}
                       onChange={handleInputChange}
-                      className="w-4 h-4 rounded border-white/20 bg-white/5 text-primary-500 focus:ring-primary-400"
+                      className="w-4 h-4 rounded border-white/20 bg-dark-900 text-primary-500 focus:ring-primary-400"
                     />
-                    <label htmlFor="ndaRequired" className="text-white/60 text-xs font-body cursor-pointer">
-                      Please send a Mutual Non-Disclosure Agreement (NDA) prior to our consultation call.
+                    <label htmlFor="ndaRequired" className="text-slate-400 text-xs font-body cursor-pointer">
+                      Please execute a Mutual Non-Disclosure Agreement (NDA) prior to technical file transfer.
                     </label>
                   </div>
                 </div>
@@ -1189,7 +1359,7 @@ export default function Consultation() {
                 <button
                   type="submit"
                   disabled={submitStatus === 'submitting'}
-                  className="w-full py-4 bg-primary-500 hover:bg-primary-400 text-white font-body font-semibold rounded-full text-base tracking-wide transition-all shadow-lg shadow-primary-500/25 flex items-center justify-center gap-3 disabled:opacity-60"
+                  className="btn-primary w-full py-3.5 text-base tracking-wide"
                 >
                   {submitStatus === 'submitting' ? (
                     <>
@@ -1201,8 +1371,8 @@ export default function Consultation() {
                     </>
                   ) : (
                     <>
-                      Schedule Engineering Advisory Session
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <span>Schedule Engineering Advisory Session</span>
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </>
@@ -1353,45 +1523,52 @@ export default function Consultation() {
               {/* Modal Header */}
               <div className="mb-6 pb-5 border-b border-white/10">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-500/20 border border-primary-500/40 rounded-full text-primary-300 text-xs font-mono font-medium">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/[0.04] border border-white/10 rounded-md text-slate-300 text-xs font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     Partner Company Vacancy Portal
                   </span>
-                  <span className="text-xs font-mono text-emerald-400 px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-md">
+                  <span className="text-xs font-mono text-primary-300 px-2.5 py-0.5 bg-primary-500/10 border border-primary-500/20 rounded-md">
                     {activeVacancyForModal?.openings || 'Active Vacancy'}
                   </span>
                 </div>
-                <h3 className="font-display text-2xl font-bold text-white flex items-center gap-2 mt-1">
-                  <span>{activeVacancyForModal?.title}</span>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white mt-1">
+                  {activeVacancyForModal?.title}
                 </h3>
-                <div className="flex flex-wrap items-center gap-3 text-white/70 text-xs font-body mt-2">
-                  <span className="flex items-center gap-1 text-white/80 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
-                    📍 {activeVacancyForModal?.location}
+                <div className="flex flex-wrap items-center gap-2 text-slate-400 text-xs font-body mt-2">
+                  <span className="flex items-center gap-1.5 bg-dark-900/80 px-2.5 py-1 rounded-md border border-white/5">
+                    <svg className="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    </svg>
+                    {activeVacancyForModal?.location}
                   </span>
-                  <span className="flex items-center gap-1 text-white/80 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
-                    ⏱️ {activeVacancyForModal?.experience}
+                  <span className="flex items-center gap-1.5 bg-dark-900/80 px-2.5 py-1 rounded-md border border-white/5">
+                    <svg className="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {activeVacancyForModal?.experience}
                   </span>
-                  <span className="text-emerald-400 font-medium">
-                    ✓ Direct Screening by iGatebots
+                  <span className="text-emerald-400 font-mono text-[11px] flex items-center gap-1">
+                    <span className="w-1 h-1 rounded-full bg-emerald-400" />
+                    Vetted by iGatebots Lead Engineers
                   </span>
                 </div>
               </div>
 
               {/* Mode Switcher Tabs */}
-              <div className="flex rounded-xl bg-dark-800 p-1.5 mb-6 border border-white/15 shadow-inner">
+              <div className="flex rounded-xl bg-dark-900 p-1 mb-6 border border-white/10">
                 <button
                   type="button"
                   onClick={() => {
                     setModalMode('candidate');
                     setModalSubmitStatus('idle');
                   }}
-                  className={`flex-1 py-2.5 rounded-lg text-xs sm:text-sm font-body font-semibold transition-all ${
+                  className={`flex-1 py-2 rounded-lg text-xs sm:text-sm font-body font-medium transition-all ${
                     modalMode === 'candidate'
-                      ? 'bg-primary-500 text-white shadow-md shadow-primary-500/30'
-                      : 'text-white/70 hover:text-white hover:bg-white/5'
+                      ? 'bg-primary-600 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  👨‍💻 Candidate Application
+                  Candidate Application
                 </button>
                 <button
                   type="button"
@@ -1399,35 +1576,38 @@ export default function Consultation() {
                     setModalMode('company');
                     setModalSubmitStatus('idle');
                   }}
-                  className={`flex-1 py-2.5 rounded-lg text-xs sm:text-sm font-body font-semibold transition-all ${
+                  className={`flex-1 py-2 rounded-lg text-xs sm:text-sm font-body font-medium transition-all ${
                     modalMode === 'company'
-                      ? 'bg-primary-500 text-white shadow-md shadow-primary-500/30'
-                      : 'text-white/70 hover:text-white hover:bg-white/5'
+                      ? 'bg-primary-600 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  🏢 Company Talent Request
+                  Company Staffing Request
                 </button>
               </div>
 
               {/* Modal Body */}
               {modalSubmitStatus === 'success' ? (
                 <div className="text-center py-10">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto mb-4 text-emerald-400">
+                  <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4 text-emerald-400">
                     <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
+                  <div className="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md font-mono text-xs mb-3">
+                    VERIFICATION TICKET: {appTicketId}
+                  </div>
                   <h4 className="font-display text-2xl font-bold text-white mb-2">
-                    {modalMode === 'candidate' ? 'Application Submitted!' : 'Staffing Request Received!'}
+                    {modalMode === 'candidate' ? 'Application Logged in Technical Portal' : 'Staffing Requisition Received'}
                   </h4>
-                  <p className="text-white/80 text-sm max-w-md mx-auto mb-6 font-body leading-relaxed">
+                  <p className="text-slate-300 text-sm max-w-md mx-auto mb-6 font-body leading-relaxed">
                     {modalMode === 'candidate'
-                      ? 'Your profile has been forwarded to our technical recruitment desk. A senior engineering lead will review your background and reach out regarding partner company interviews.'
-                      : 'Thank you for submitting your staffing requisition. Our talent acquisition team will prepare a targeted candidate shortlist and contact you within 24 hours.'}
+                      ? 'Your technical profile has been assigned to our Bangalore screening desk. A senior engineering lead will review your portfolio and reach out regarding interview scheduling.'
+                      : 'Thank you for submitting your staffing requisition. Our talent acquisition team will review your target specifications and contact you within 24 hours.'}
                   </p>
                   <button
                     onClick={() => setModalOpen(false)}
-                    className="px-6 py-2.5 bg-primary-500 hover:bg-primary-400 text-white text-xs font-body font-medium rounded-full transition-all"
+                    className="btn-primary"
                   >
                     Close Window
                   </button>
@@ -1437,7 +1617,7 @@ export default function Consultation() {
                 <form onSubmit={handleApplicantSubmit} className="space-y-4">
                   {/* Role Selection */}
                   <div>
-                    <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                    <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                       Target Engineering Vacancy <span className="text-primary-400">*</span>
                     </label>
                     <select
@@ -1449,15 +1629,13 @@ export default function Consultation() {
                           setApplicantForm((p) => ({ ...p, roleId: target.id }));
                         }
                       }}
-                      className="w-full bg-dark-950 border border-white/20 rounded-xl px-4 py-3 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
-                      style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                      className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 cursor-pointer"
                     >
                       {PARTNER_VACANCIES.map((r) => (
                         <option
                           key={r.id}
                           value={r.id}
-                          style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                          className="bg-dark-950 text-white py-2"
+                          className="bg-dark-900 text-white py-2"
                         >
                           {r.title}
                         </option>
@@ -1468,7 +1646,7 @@ export default function Consultation() {
                   {/* Name & Email */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Full Name <span className="text-primary-400">*</span>
                       </label>
                       <input
@@ -1477,12 +1655,11 @@ export default function Consultation() {
                         placeholder="e.g. Arun Kumar"
                         value={applicantForm.name}
                         onChange={(e) => setApplicantForm({ ...applicantForm, name: e.target.value })}
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Email Address <span className="text-primary-400">*</span>
                       </label>
                       <input
@@ -1491,8 +1668,7 @@ export default function Consultation() {
                         placeholder="e.g. arun.kumar@gmail.com"
                         value={applicantForm.email}
                         onChange={(e) => setApplicantForm({ ...applicantForm, email: e.target.value })}
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                   </div>
@@ -1500,7 +1676,7 @@ export default function Consultation() {
                   {/* Phone & Experience */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Phone / WhatsApp Number <span className="text-primary-400">*</span>
                       </label>
                       <input
@@ -1509,24 +1685,22 @@ export default function Consultation() {
                         placeholder="e.g. +91 98765 43210"
                         value={applicantForm.phone}
                         onChange={(e) => setApplicantForm({ ...applicantForm, phone: e.target.value })}
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Experience Level <span className="text-primary-400">*</span>
                       </label>
                       <select
                         value={applicantForm.experience}
                         onChange={(e) => setApplicantForm({ ...applicantForm, experience: e.target.value })}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 cursor-pointer"
                       >
-                        <option value="1-2 Years" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>1 - 2 Years Experience</option>
-                        <option value="3-5 Years" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>3 - 5 Years Experience</option>
-                        <option value="5-8 Years" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>5 - 8 Years Experience</option>
-                        <option value="8+ Years (Lead / Principal)" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>8+ Years (Lead / Principal)</option>
+                        <option value="1-2 Years">1 - 2 Years Experience</option>
+                        <option value="3-5 Years">3 - 5 Years Experience</option>
+                        <option value="5-8 Years">5 - 8 Years Experience</option>
+                        <option value="8+ Years (Lead / Principal)">8+ Years (Lead / Principal)</option>
                       </select>
                     </div>
                   </div>
@@ -1534,7 +1708,7 @@ export default function Consultation() {
                   {/* Location & Notice Period */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Current City / Location <span className="text-primary-400">*</span>
                       </label>
                       <input
@@ -1543,31 +1717,29 @@ export default function Consultation() {
                         required
                         value={applicantForm.location}
                         onChange={(e) => setApplicantForm({ ...applicantForm, location: e.target.value })}
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Notice Period <span className="text-primary-400">*</span>
                       </label>
                       <select
                         value={applicantForm.noticePeriod}
                         onChange={(e) => setApplicantForm({ ...applicantForm, noticePeriod: e.target.value })}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 cursor-pointer"
                       >
-                        <option value="Immediate / Serving Notice" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>Immediate / Serving Notice</option>
-                        <option value="15 Days" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>15 Days</option>
-                        <option value="30 Days" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>30 Days</option>
-                        <option value="60 - 90 Days" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>60 - 90 Days</option>
+                        <option value="Immediate / Serving Notice">Immediate / Serving Notice</option>
+                        <option value="15 Days">15 Days</option>
+                        <option value="30 Days">30 Days</option>
+                        <option value="60 - 90 Days">60 - 90 Days</option>
                       </select>
                     </div>
                   </div>
 
                   {/* Resume / Profile link */}
                   <div>
-                    <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                    <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                       LinkedIn Profile URL or Google Drive Resume Link <span className="text-primary-400">*</span>
                     </label>
                     <input
@@ -1576,14 +1748,13 @@ export default function Consultation() {
                       required
                       value={applicantForm.portfolioUrl}
                       onChange={(e) => setApplicantForm({ ...applicantForm, portfolioUrl: e.target.value })}
-                      style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                      className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                      className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                     />
                   </div>
 
                   {/* Technical Notes */}
                   <div>
-                    <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                    <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                       Core Tools & Key Competencies (Optional)
                     </label>
                     <textarea
@@ -1591,15 +1762,32 @@ export default function Consultation() {
                       placeholder="e.g. Altium Designer (6-layer boards), STM32CubeIDE, KiCad, CAN bus debugging, DFM checks..."
                       value={applicantForm.notes}
                       onChange={(e) => setApplicantForm({ ...applicantForm, notes: e.target.value })}
-                      style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                      className="w-full bg-[#0b1329] border border-white/20 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all resize-none"
+                      className="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body resize-none"
                     />
+                    <div className="flex flex-wrap items-center gap-1.5 mt-2">
+                      <span className="text-[10px] font-mono text-slate-400 uppercase mr-1">Quick Add:</span>
+                      {['Altium (6L+)', 'KiCad 8', 'STM32 / RTOS', 'CAN-FD / ISO 26262', 'High-Speed SI', 'DFM / DFX'].map((tag) => (
+                        <button
+                          key={tag}
+                          type="button"
+                          onClick={() => {
+                            setApplicantForm((prev) => ({
+                              ...prev,
+                              notes: prev.notes ? `${prev.notes}, ${tag}` : tag,
+                            }));
+                          }}
+                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-dark-850 hover:bg-primary-600/20 text-slate-300 hover:text-white border border-white/10 transition-colors"
+                        >
+                          + {tag}
+                        </button>
+                      ))}
+                    </div>
                   </div>
 
                   <button
                     type="submit"
                     disabled={modalSubmitStatus === 'submitting'}
-                    className="w-full py-3.5 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary-500/25 disabled:opacity-60 mt-2"
+                    className="btn-primary w-full py-3 text-sm font-semibold mt-2"
                   >
                     {modalSubmitStatus === 'submitting' ? 'Submitting Application...' : 'Submit Job Application'}
                   </button>
@@ -1609,7 +1797,7 @@ export default function Consultation() {
                 <form onSubmit={handleCompanySubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Company / Organization Name <span className="text-primary-400">*</span>
                       </label>
                       <input
@@ -1618,12 +1806,11 @@ export default function Consultation() {
                         placeholder="e.g. Acme Technologies Ltd"
                         value={companyForm.companyName}
                         onChange={(e) => setCompanyForm({ ...companyForm, companyName: e.target.value })}
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Contact Person & Designation <span className="text-primary-400">*</span>
                       </label>
                       <input
@@ -1632,15 +1819,14 @@ export default function Consultation() {
                         placeholder="e.g. Rajesh Sharma, VP Engineering"
                         value={companyForm.contactName}
                         onChange={(e) => setCompanyForm({ ...companyForm, contactName: e.target.value })}
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Official Work Email <span className="text-primary-400">*</span>
                       </label>
                       <input
@@ -1649,12 +1835,11 @@ export default function Consultation() {
                         placeholder="e.g. rajesh@acmetech.com"
                         value={companyForm.workEmail}
                         onChange={(e) => setCompanyForm({ ...companyForm, workEmail: e.target.value })}
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Phone / WhatsApp Number <span className="text-primary-400">*</span>
                       </label>
                       <input
@@ -1663,29 +1848,26 @@ export default function Consultation() {
                         placeholder="e.g. +91 98765 43210"
                         value={companyForm.phone}
                         onChange={(e) => setCompanyForm({ ...companyForm, phone: e.target.value })}
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all"
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body"
                       />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Target Engineering Role <span className="text-primary-400">*</span>
                       </label>
                       <select
                         value={companyForm.roleId}
                         onChange={(e) => setCompanyForm({ ...companyForm, roleId: e.target.value })}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 cursor-pointer"
                       >
                         {PARTNER_VACANCIES.map((r) => (
                           <option
                             key={r.id}
                             value={r.id}
-                            style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                            className="bg-dark-950 text-white py-2"
+                            className="bg-dark-900 text-white py-2"
                           >
                             {r.title}
                           </option>
@@ -1693,25 +1875,24 @@ export default function Consultation() {
                       </select>
                     </div>
                     <div>
-                      <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                      <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                         Positions Needed <span className="text-primary-400">*</span>
                       </label>
                       <select
                         value={companyForm.positionsNeeded}
                         onChange={(e) => setCompanyForm({ ...companyForm, positionsNeeded: e.target.value })}
-                        className="w-full bg-[#0b1329] border border-white/20 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 cursor-pointer"
-                        style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
+                        className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs sm:text-sm font-body focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 cursor-pointer"
                       >
-                        <option value="1 Engineer" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>1 Engineer</option>
-                        <option value="2-3 Engineers" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>2 - 3 Engineers</option>
-                        <option value="4-5 Engineers" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>4 - 5 Engineers</option>
-                        <option value="Dedicated Pod / Team (5+)" style={{ backgroundColor: '#0b1329', color: '#ffffff' }}>Dedicated Pod / Team (5+)</option>
+                        <option value="1 Engineer">1 Engineer</option>
+                        <option value="2-3 Engineers">2 - 3 Engineers</option>
+                        <option value="4-5 Engineers">4 - 5 Engineers</option>
+                        <option value="Dedicated Pod / Team (5+)">Dedicated Pod / Team (5+)</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-white/90 text-xs font-body font-semibold mb-1.5 block">
+                    <label className="text-slate-300 text-xs font-body font-semibold mb-1.5 block">
                       Specific Requirements & Work Model
                     </label>
                     <textarea
@@ -1719,15 +1900,14 @@ export default function Consultation() {
                       placeholder="e.g. Must have 4+ years in automotive ISO 26262, on-site in Bangalore, immediate joining required..."
                       value={companyForm.requirements}
                       onChange={(e) => setCompanyForm({ ...companyForm, requirements: e.target.value })}
-                      style={{ backgroundColor: '#0b1329', color: '#ffffff' }}
-                      className="w-full bg-[#0b1329] border border-white/20 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-white/40 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400 transition-all resize-none"
+                      className="w-full bg-dark-900 border border-white/10 rounded-xl p-3 text-white text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:border-primary-400 focus:ring-1 focus:ring-primary-400/30 transition-all font-body resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={modalSubmitStatus === 'submitting'}
-                    className="w-full py-3.5 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary-500/25 disabled:opacity-60 mt-2"
+                    className="btn-primary w-full py-3 text-sm font-semibold mt-2"
                   >
                     {modalSubmitStatus === 'submitting' ? 'Submitting Requisition...' : 'Request Candidate Shortlist'}
                   </button>

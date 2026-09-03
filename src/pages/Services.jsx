@@ -17,20 +17,20 @@ export default function Services() {
         <PCBBackground />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-xs font-body tracking-widest uppercase mb-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/[0.04] border border-white/10 rounded-full text-slate-300 text-xs font-mono tracking-wider uppercase mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
-              Engineering Services
+              Comprehensive Engineering Capabilities
             </div>
-            <h1 className="font-display text-5xl lg:text-7xl font-bold text-white mt-2 mb-6">
-              What We <span className="gradient-text">Offer</span>
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight mt-2 mb-6">
+              Precision <span className="gradient-text">Engineering Services</span>
             </h1>
-            <p className="text-white/45 text-lg max-w-xl mx-auto font-body">
-              From concept to deployment — comprehensive engineering services tailored for modern electronic challenges.
+            <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-body leading-relaxed">
+              From initial architecture definition to mass-manufacturing bring-up — specialized electronic hardware, embedded firmware, and PCB engineering capabilities engineered for zero-defect reliability.
             </p>
-            <nav className="flex items-center justify-center gap-2 mt-6 text-sm text-white/35 font-body">
-              <Link to="/" className="hover:text-white/60 transition-colors">Home</Link>
+            <nav className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400 font-mono">
+              <Link to="/" className="hover:text-white transition-colors">Home</Link>
               <span>/</span>
-              <span className="text-white/60">Services</span>
+              <span className="text-primary-400 font-medium">Services</span>
             </nav>
           </AnimatedSection>
         </div>
@@ -72,9 +72,9 @@ export default function Services() {
                   </div>
                   <Link
                     to={service.slug === 'consultation' ? '/consultancy' : `/services/${service.slug}`}
-                    className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25"
+                    className="btn-primary"
                   >
-                    {service.slug === 'consultation' ? 'View Consultancy & Staffing' : 'View Details'}
+                    <span>{service.slug === 'consultation' ? 'View Consultancy & Staffing' : 'View Details'}</span>
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -86,18 +86,17 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(26,108,255,0.12) 0%, rgba(0,200,255,0.06) 100%)' }} />
-        <div className="absolute inset-0 bg-grid-pattern opacity-50" />
+      <section className="py-20 relative overflow-hidden border-t border-white/5">
+        <div className="absolute inset-0 bg-dark-850/70" />
         <div className="relative max-w-3xl mx-auto px-4 text-center">
           <AnimatedSection>
-            <h2 className="font-display text-4xl font-bold text-white mb-4">Need a Custom Solution?</h2>
-            <p className="text-white/45 mb-8 font-body">Our team is ready to discuss your specific requirements and create a tailored engineering plan.</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Need a Custom Engineering Architecture?</h2>
+            <p className="text-slate-400 mb-8 font-body text-base">Our leadership team is available to review your system schematics and formulate a tailored hardware roadmap.</p>
             <Link
               to="/consultancy"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary-500 hover:bg-primary-400 text-white font-body font-medium rounded-full text-sm transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25"
+              className="btn-primary"
             >
-              Request a Consultation
+              Request Technical Consultation
             </Link>
           </AnimatedSection>
         </div>

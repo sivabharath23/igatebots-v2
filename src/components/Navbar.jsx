@@ -218,7 +218,7 @@ export default function Navbar() {
               <div className="w-px h-5 bg-white/10 mx-2" />
               <Link
                 to="/contact"
-                className="flex items-center gap-2 px-5 py-2.5 bg-primary-500 hover:bg-primary-400 text-white text-sm font-body font-medium rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-primary-500/25 hover:shadow-glow-primary hover:-translate-y-0.5 active:scale-95"
+                className="flex items-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-500 text-white text-sm font-body font-semibold rounded-xl transition-all duration-200 shadow-sm active:scale-95"
               >
                 Get a Quote
               </Link>
